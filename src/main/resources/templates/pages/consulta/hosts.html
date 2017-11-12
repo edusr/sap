@@ -140,10 +140,10 @@
 		        </span>
 		      </a>
               <ul class="treeview-menu">
-            	<li><a href="#"><i class="fa fa-print"></i> Impressora</a></li>
+            	<li><a th:href="@{/hosts/novo}"><i class="fa fa-desktop"></i> Host</a></li>
+            	<li><a th:href="@{/impressora/novo}"><i class="fa fa-print"></i> Impressora</a></li>
             	<li><a href="#"><i class="fa fa-wrench"></i> Produtos</a></li>
             	<li><a href="#"><i class="fa fa-print"></i> Tonner</a></li>
-            	<li><a th:href="@{/hosts/novo}"><i class="fa fa-desktop"></i> Host</a></li>
               </ul>
             </li>
           </ul>
@@ -182,6 +182,12 @@
     <section class="content">
       <!-- Small boxes (Stat box) -->
       <div class="box box-success">
+         <div class="box-header with-border">
+         	<a th:href="@{/hosts/novo}">
+         	  <span class="glyphicon glyphicon-plus"></span>
+         	  <b>Adicionar</b>
+         	</a>
+         </div>
          <div style="text-align: center" class="box-header with-border">
            <h3 class="box-title">HOSTS</h3>
          </div>
@@ -193,7 +199,7 @@
                  <th>Hostname</th>
                  <th>Departamento</th>
                  <th>Endereço MAC</th>
-                 <th>Status</th>
+                 <th style="width: 12%">Status</th>
                </tr>
              </thead>
              <tbody>
@@ -201,7 +207,7 @@
                <td>INF-001</td>
                <td>TI</td>
                <td>48-5B-39-F8-68-20</td>
-               <td><span class="label label-success">Ativo</span></td>
+               <td ><span class="label label-success">Ativo</span></td>
              </tr>
              <tr>
                <td>FIN-011</td>
