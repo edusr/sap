@@ -4,10 +4,14 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "thost")
@@ -21,19 +25,50 @@ public class Host implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@NotBlank
 	@Column(length = 9)
 	private String hostname;
-	@Column(name = "tpHost")
-	private String tipoHost;
+
+	@Column(name = "tipo")
+	@NotBlank
+	@Enumerated(EnumType.STRING)
+	private TipoHost tipoHost;
+
 	@Column(name = "depto")
+	@NotBlank
+	@Enumerated(EnumType.STRING)
 	private Departamento departamento;
-	@Column(name = "usrResp")
-	private String usuarioResponsavel;
+
+	@Column(name = "utilizador")
+	private String utilizador;
+
 	@Column(name = "mac", length = 17)
+	@NotBlank
 	private String enderecoMac;
-	@Column(name = "sisoperacional")
-	private SistemaOperacional sistemaOperacional;
+
+	@Column(name = "vrssisoperacional")
+	@Enumerated(EnumType.STRING)
+	@NotBlank
+	private VersaoSO versaoSO;
+
+	@Column(name = "arquiteturaso")
+	@NotBlank
+	private ArquiteturaSO arquiteturaSO;
+
+	@Column(name = "chvlicso", length = 29)
+	private String chaveLicenca;
+
+	@Column(name = "memram")
+	@Enumerated(EnumType.STRING)
+	@NotBlank
+	private MemoriaRam memoriaRam;
+
+	@NotBlank
+	private Processador processador;
+
 	@Column(name = "status")
+	@Enumerated(EnumType.STRING)
 	private StatusHost statusHost;
 
 	public Long getId() {
@@ -52,11 +87,11 @@ public class Host implements Serializable {
 		this.hostname = hostname;
 	}
 
-	public String getTipoHost() {
+	public TipoHost getTipoHost() {
 		return tipoHost;
 	}
 
-	public void setTipoHost(String tipoHost) {
+	public void setTipoHost(TipoHost tipoHost) {
 		this.tipoHost = tipoHost;
 	}
 
@@ -68,12 +103,12 @@ public class Host implements Serializable {
 		this.departamento = departamento;
 	}
 
-	public String getUsuarioResponsavel() {
-		return usuarioResponsavel;
+	public String getUtilizador() {
+		return utilizador;
 	}
 
-	public void setUsuarioResponsavel(String usuarioResponsavel) {
-		this.usuarioResponsavel = usuarioResponsavel;
+	public void setUtilizador(String utilizador) {
+		this.utilizador = utilizador;
 	}
 
 	public String getEnderecoMac() {
@@ -84,12 +119,44 @@ public class Host implements Serializable {
 		this.enderecoMac = enderecoMac;
 	}
 
-	public SistemaOperacional getSistemaOperacional() {
-		return sistemaOperacional;
+	public VersaoSO getVersaoSO() {
+		return versaoSO;
 	}
 
-	public void setSistemaOperacional(SistemaOperacional sistemaOperacional) {
-		this.sistemaOperacional = sistemaOperacional;
+	public void setVersaoSO(VersaoSO versaoSO) {
+		this.versaoSO = versaoSO;
+	}
+
+	public ArquiteturaSO getArquiteturaSO() {
+		return arquiteturaSO;
+	}
+
+	public void setArquiteturaSO(ArquiteturaSO arquiteturaSO) {
+		this.arquiteturaSO = arquiteturaSO;
+	}
+
+	public String getChaveLicenca() {
+		return chaveLicenca;
+	}
+
+	public void setChaveLicenca(String chaveLicenca) {
+		this.chaveLicenca = chaveLicenca;
+	}
+
+	public MemoriaRam getMemoriaRam() {
+		return memoriaRam;
+	}
+
+	public void setMemoriaRam(MemoriaRam memoriaRam) {
+		this.memoriaRam = memoriaRam;
+	}
+
+	public Processador getProcessador() {
+		return processador;
+	}
+
+	public void setProcessador(Processador processador) {
+		this.processador = processador;
 	}
 
 	public StatusHost getStatusHost() {

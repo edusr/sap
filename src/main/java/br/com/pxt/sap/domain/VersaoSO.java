@@ -2,45 +2,30 @@ package br.com.pxt.sap.domain;
 
 public enum VersaoSO {
 
-	WINDOWS_XP(1),
-	WINDOWS_7_STARTER(2),
-	WINDOWS_7_PROFESSIONAL(3),
-	WINDOWS_7_HOME_BASIC(4),
-	WINDOWS_7_HOME_PREMIUM(5),
-	WINDOWS_7_ENTERPRISE(6),
-	WINDOWS_7_ULTIMATE(7),
-	WINDOWS_8(8),
-	WINDOWS_8_1(9),
-	WINDOWS_10(10),
-	LINUX(11);
+	WINDOWS_XP(1, "Windows XP"),
+	WINDOWS_VISTA(2, "Windows XP"),
+	WINDOWS_7_PROFESSIONAL(3, "Windows 7 Professional"),
+	WINDOWS_8(4, "Windows 8"),
+	WINDOWS_8_SINGLE_LANG(5, "Windows 8 Single Language"),
+	WINDOWS_8_1(6, "Windows 8.1"),
+	WINDOWS_8_1_SINGLE_LANG(7, "Windows 8.1 Single Language"),
+	WINDOWS_10(8, "Windows 10"),
+	WINDOWS_10_SINGLE_LANG(9, "Windows 10 Single Language"),
+	LINUX(10, "Linux");
 	
 	public int valor;
-	
-	VersaoSO(int valor) {
+	public String descricao;
+
+	VersaoSO(int valor, String descricao) {
 		this.valor = valor;
+		this.descricao = descricao;
 	}
 	
 	public int getValor() {
 		return this.valor;
 	}
 	
-	@Override
-	public String toString() {
-		switch (this) {
-			case WINDOWS_XP: return "Windows XP";
-			case WINDOWS_7_STARTER: return "Windows 7 Starter";
-			case WINDOWS_7_PROFESSIONAL: return "Windows 7 Professional";
-			case WINDOWS_7_HOME_BASIC: return "Windows 7 Home Basic";
-			case WINDOWS_7_HOME_PREMIUM: return "Windows 7 Home Premium";
-			case WINDOWS_7_ENTERPRISE: return "Windows 7 Enterprise";
-			case WINDOWS_7_ULTIMATE: return "Windows 7 Ultime";
-			case WINDOWS_8: return "Windows 8";
-			case WINDOWS_8_1: return "Windows 8.1";
-			case WINDOWS_10: return "Windows 10";
-			case LINUX: return "Linux";
-			default:
-				return "Versão desconhecida";
-		}
-		
+	public String getDescricao() {
+		return this.descricao;
 	}
 }

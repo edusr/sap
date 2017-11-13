@@ -206,10 +206,10 @@
              <tbody>
                 <tr th:each="host : ${hosts}">
              	  <td th:text="${host.hostname}"></td>
-             	  <td th:text="${host.departamento.toString()}"></td>
+             	  <td th:text="${host.departamento.descricao}"></td>
              	  <td th:text="${host.enderecoMac}"></td>
-             	  <td th:text="if ${host.statusHost.getValor() == 1}"><span class="label label-success"></span></td>
-             	  <td th:text="if ${host.statusHost.getValor() == 2}"><span class="label label-primary"></span></td>
+             	  <td><span th:if="${host.statusHost.valor == 1}" class="label label-success" th:text="${host.statusHost.descricao}"></span></td>
+             	  <td><span th:if="${host.statusHost.valor == 2}" class="label label-primary" th:text="${host.statusHost.descricao}"></span></td>
              	</tr>
              </tbody>
              <tfoot>
@@ -236,7 +236,7 @@
                   <b>Departamento</b> <a class="pull-right">TI</a>
                 </li>
                 <li class="list-group-item">
-                  <b>Usuário</b> <a class="pull-right">Matheus Maske</a>
+                  <b>Utilizador</b> <a class="pull-right">Matheus Maske</a>
                 </li>
                 <li class="list-group-item">
                   <b>Endereço MAC</b> <a class="pull-right">48-5B-39-F8-68-20</a>

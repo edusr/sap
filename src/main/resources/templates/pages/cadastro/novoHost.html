@@ -89,6 +89,7 @@
         </div>
         <div class="pull-left info">
           <p>Matheus Maske</p>
+          <small>matheusm@peixoto.com.br</small>
         </div>
       </div>
       <!-- search form -->
@@ -175,51 +176,36 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h2>
-        Novo
-      </h2>
-    </section>
-
     <!-- Main content -->
     <section class="content">
       <!-- Small boxes (Stat box) -->
-      <div class="box box-info">
+      <div class="box box-success">
         <div class="box-header with-border">
            <h3 class="box-title">Host</h3>
         </div>
-		<form role="form"">
+		<form role="form" th:action="@{/hosts/salvar}" th:object="${host}" method="POST">
           <div class="box-body">
             <div class="row">
               <div class="col-xs-2">
                 <label>Tipo</label>
-                <select class="form-control">
-            	    <option hidden="true"></option>
-	              	<option>Desktop</option>
-	              	<option>Notebook</option>
+                <select class="form-control" th:field="*{tipoHost}">
+	              	<option th:each="tphost : ${tphost}" th:value="${tphost}" th:text="${tphost.descricao}"></option>
 	            </select>
               </div>
               <div class="col-xs-2 has-error">
                 <label>Hostname</label>
-                <input style="text-transform:uppercase;" type="text" class="form-control" id="hostname" placeholder="INF-000">
+                <input th:field="*{hostname}" style="text-transform:uppercase;" type="text" class="form-control" placeholder="INF-000 / INFNB-000">
                 <span class="help-block">Hostname em uso</span>
               </div>
 	          <div class="col-xs-2">
             	<label>Departamento</label>
-            	<select class="form-control">
-            	    <option hidden="true"></option>
-	              	<option>TI</option>
-	              	<option>Financeiro</option>
-	              	<option>Controladoria</option>
-	              	<option>RH</option>
-	              	<option>Logística</option>
-	              	<option>Comercial</option>
+            	<select class="form-control" th:field="*{departamento}">
+	              	<option th:each="departamento : ${departamento}" th:value="${departamento}" th:text="${departamento.descricao}"></option>
             	</select>
           	  </div>
           	  <div class="col-xs-3">
-          	    <label>Usuário responsável</label>
-          	    <input type="text" class="form-control">
+          	    <label>Utilizador</label>
+          	    <input type="text" class="form-control" th:field="*{utilizador}">
           	  </div>
             </div>
 	        <div class="with-border">
@@ -228,65 +214,38 @@
             <div class="row">
               <div class="col-xs-2 has-error">
                 <label>Endereço Mac</label>
-                <input class="form-control" style="text-transform:uppercase;" id="macAddress" type="text" maxlength="17">
+                <input class="form-control" style="text-transform:uppercase;" id="macAddress" type="text" maxlength="17" th:field="*{enderecoMac}">
                 <span class="help-block">Endereço mac em uso</span>
               </div>
               <div class="col-xs-3">
               	<label>Sistema Operacional</label>
-              	<select class="form-control">
-            	    <option hidden="true"></option>
-            	    <option>Windows XP</option>
-	              	<option>Windows 7 Professional</option>
-	              	<option>Windows 7 Starter</option>
-	              	<option>Windows 7 Ultimate</option>
-	              	<option>Windows 8</option>
-	              	<option>Windows 8.1</option>
-	              	<option>Windows 10</option>
-	              	<option>Linux</option>
+              	<select class="form-control" th:field="*{versaoSO}">
+	              	<option th:each="versao : ${versaoso}" th:value="${versao}" th:text="${versao.descricao}"></option>
             	</select>
               </div>
               <div class="col-xs-2">
               	<label>Arquitetura</label>
-              	<select class="form-control">
-            	    <option hidden="true"></option>
-	              	<option>64 bits</option>
-	              	<option>32 bits</option>
+              	<select class="form-control" th:field="*{arquiteturaSO}">
+	              	<option th:each="arqso : ${arqso}" th:value="${arqso}" th:text="${arqso.descricao}"></option>
             	</select>
               </div>
               <div class="col-xs-3">
                 <label>Chave de Licença</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" th:field="*{chaveLicenca}">
               </div>
             </div>
             <br>
             <div class="row">
               <div class="col-xs-2">
               	<label>Processador</label>
-              	<select class="form-control">
-            	    <option hidden="true"></option>
-	              	<option>Atom</option>
-	              	<option>Celeron</option>
-	              	<option>Core 2 Duo</option>
-	              	<option>Core 2 Quad</option>
-	              	<option>Duo Core</option>
-	              	<option>Quad Core</option>
-	              	<option>Core i3</option>
-	              	<option>Core i5</option>
-	              	<option>Core i7</option>
+              	<select class="form-control" th:field="*{processador}">
+	              	<option th:each="processador : ${processador}" th:value="${processador}" th:text="${processador.descricao}"></option>
             	</select>
               </div>
               <div class="col-xs-2">
               	<label>Memória RAM</label>
-              	<select class="form-control">
-            	    <option hidden="true"></option>
-	              	<option>2 GB</option>
-	              	<option>4 GB</option>
-	              	<option>6 GB</option>
-	              	<option>8 GB</option>
-	              	<option>12 GB</option>
-	              	<option>16 GB</option>
-	              	<option>24 GB</option>
-	              	<option>32 GB</option>
+              	<select class="form-control" th:field="*{memoriaRam}">
+	              	<option th:each="ram : ${ram}" th:value="${ram}" th:text="${ram.descricao}"></option>
             	</select>
               </div>
             </div>
@@ -331,11 +290,6 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="https://rawgit.com/digitalBush/jquery.maskedinput/1.4.1/dist/jquery.maskedinput.min.js"></script>
 
-<script>
-	$(function() {
-      $("#hostname").mask("aaa-999");
-	});
-</script>
 <script>
 	var macAddress = document.getElementById("macAddress");
 	

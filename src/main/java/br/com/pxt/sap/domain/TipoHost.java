@@ -1,14 +1,15 @@
 package br.com.pxt.sap.domain;
 
-public enum StatusHost {
+public enum TipoHost {
 
-	ATIVO(1, "Ativo"),
-	EM_MANUTENCAO(2, "Em manutenção");
+	DESKTOP(1, "Desktop"),
+	NOTEBOOK(2, "Notebook"),
+	ALL_IN_ONE(3, "All in One");
 	
 	public int valor;
 	public String descricao;
 
-	StatusHost(int valor, String descricao) {
+	TipoHost(int valor, String descricao) {
 		this.valor = valor;
 		this.descricao = descricao;
 	}
@@ -20,4 +21,5 @@ public enum StatusHost {
 	public String getDescricao() {
 		return this.descricao;
 	}
+	
 }
