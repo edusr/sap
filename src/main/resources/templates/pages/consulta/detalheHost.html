@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Data Tables</title>
+  <title>AdminLTE 2 | User Profile</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -13,8 +13,6 @@
   <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="../../bower_components/Ionicons/css/ionicons.min.css">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="../../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -29,8 +27,7 @@
   <![endif]-->
 
   <!-- Google Font -->
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -140,10 +137,10 @@
 		        </span>
 		      </a>
               <ul class="treeview-menu">
-            	<li><a th:href="@{/hosts/novo}"><i class="fa fa-desktop"></i> Host</a></li>
-            	<li><a th:href="@{/impressora/novo}"><i class="fa fa-print"></i> Impressora</a></li>
+            	<li><a href="#"><i class="fa fa-print"></i> Impressora</a></li>
             	<li><a href="#"><i class="fa fa-wrench"></i> Produtos</a></li>
             	<li><a href="#"><i class="fa fa-print"></i> Tonner</a></li>
+            	<li><a th:href="@{/hosts/novo}"><i class="fa fa-desktop"></i> Host</a></li>
               </ul>
             </li>
           </ul>
@@ -178,54 +175,16 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+    <section class="content-header">
+      <h1>
+        Detalhamento do Host
+      </h1>
+    </section>
+
     <!-- Main content -->
     <section class="content">
-      
-      <div class="col-md-9">
-       <div class="box box-primary">
-         <div class="box-header with-border">
-         	<a th:href="@{/hosts/novo}">
-         	  <span class="glyphicon glyphicon-plus"></span>
-         	  <b>Adicionar</b>
-         	</a>
-         </div>
-         <div style="text-align: center" class="box-header with-border">
-           <h3 class="box-title">HOSTS</h3>
-         </div>
-         <!-- /.box-header -->
-         <div class="box-body">
-           <table id="example1" class="table table-bordered table-striped">
-             <thead>
-               <tr>
-                 <th>Hostname</th>
-                 <th>Departamento</th>
-                 <th>Endereço MAC</th>
-                 <th style="width: 12%">Status</th>
-               </tr>
-             </thead>
-             <tbody>
-                <tr th:each="host : ${hosts}">
-             	  <td th:text="${host.hostname}"></td>
-             	  <td th:text="${host.departamento.toString()}"></td>
-             	  <td th:text="${host.enderecoMac}"></td>
-             	  <td th:text="if ${host.statusHost.getValor() == 1}"><span class="label label-success"></span></td>
-             	  <td th:text="if ${host.statusHost.getValor() == 2}"><span class="label label-primary"></span></td>
-             	</tr>
-             </tbody>
-             <tfoot>
-             <tr>
-               <th>Hostname</th>
-               <th>Departamento</th>
-               <th>Endereço MAC</th>
-               <th>Status</th>
-             </tr>
-             </tfoot>
-           </table>
-         </div>
-        </div>
-      </div>
-      
-      <div class="col-md-3">
+
+        <div class="col-md-3">
           <!-- Profile Image -->
           <div class="box box-primary">
             <div class="box-body box-profile">
@@ -233,45 +192,101 @@
 
               <ul class="list-group list-group-unbordered">
                 <li class="list-group-item">
-                  <b>Departamento</b> <a class="pull-right">TI</a>
-                </li>
-                <li class="list-group-item">
                   <b>Usuário</b> <a class="pull-right">Matheus Maske</a>
                 </li>
-                <li class="list-group-item">
-                  <b>Endereço MAC</b> <a class="pull-right">48-5B-39-F8-68-20</a>
-                </li>
-                <li class="list-group-item">
-                  <b>S.O.</b> <a class="pull-right">Windows 10 64 bits</a>
-                </li>
-                <li class="list-group-item">
-                  <b>Chave de Licença S.O.</b> <br><a>51A51-51A51-51A51-51A51-51A51</a>
-                </li>
-                <li class="list-group-item">
-                  <b>Processador</b> <a class="pull-right">Core i5</a>
-                </li>
-                <li class="list-group-item">
-                  <b>RAM</b> <a class="pull-right">8 GB</a>
-                </li>
               </ul>
+
+              <a th:ref="@{/hosts/consulta}" class="btn btn-primary"><i class="fa fa-mail-reply"></i> Voltar</a>
             </div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
 
         </div>
+        <!-- /.col -->
+        <div class="col-md-9">
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#infoGeral" data-toggle="tab">Informações gerais</a></li>
+              <li><a href="#configuracoes" data-toggle="tab">Configurações</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="active tab-pane" id="infoGeral">
+			    <div class="box-body">
+                  <div class="row">
+                    <div class="col-xs-2">
+                      <label>Hostname</label>
+                      <output>INF-001</output>
+                    </div>
+                    <div class="col-xs-2">
+                      <label>Departamento</label>
+                      <output>TI</output>
+                    </div>
+                    <div class="col-xs-3">
+                      <label>Usuário responsável</label>
+                      <output>Matheus Maske</output>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="tab-pane" id="configuracoes">
+                <div class="box-body">
+                  <div class="row">
+                    <div class="col-xs-2">
+                      <label>Endereço MAC</label>
+                      <output>48-5B-39-F8-68-20</output>
+                    </div>
+                    <div class="col-xs-2">
+                      <label>Sistema Operacional</label>
+                      <output>Windows 10</output>
+                    </div>
+                    <div class="col-xs-3">
+                      <label>Arquitetura</label>
+                      <output>64 bits</output>
+                    </div>
+                    <div class="col-xs-4">
+                      <label>Chave de Licença</label>
+                      <output>4SXSA-4SXA1-55ESU-KI5CE-58E6C</output>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-2">
+                      <label>Processador</label>
+                      <output>Core 2 Duo</output>
+                    </div>
+                    <div class="col-xs-2">
+                      <label>Memória RAM</label>
+                      <output>6 GB</output>
+                    </div>
+                </div>
+              </div>
+
+              <div class="tab-pane" id="settings">
+                
+              </div>
+              
+            </div>
+            <!-- /.tab-content -->
+          </div>
+          <!-- /.nav-tabs-custom -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
     </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
- 
+  
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
       <b>Versão</b> 1.0.0
     </div>
     <strong><a href="#">Sistema de Apoio a Produção</a></strong>
   </footer>
-
+   
 </div>
 <!-- ./wrapper -->
 
@@ -279,44 +294,31 @@
 <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- DataTables -->
-<script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<!-- SlimScroll -->
-<script src="../../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
 <script src="../../bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../../dist/js/demo.js"></script>
-<!-- page script -->
-<script>
 
-  $(function () {
-    $('#example1').DataTable({
-  	  "language": { //altera informações da tabela para português
-  	    "paginate": {
-  	      "previous": "Anterior",
-  	      "next": "Próximo"
-  	    },
-  	    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
-  	    "search": "Buscar:",
-  	    "lengthMenu": "Ver _MENU_ registros",
-  	    "zeroRecords": "Nenhum registro encontrado",
-  	    "infoEmpty": "",
-  	    "infoFiltered":   "",
-  	    "searchPlaceholder": "Hostname, Depto, MAC"
-  	  },
-  	  "columns": [ //altera as colunas que são pesquisáveis
-  		{"searchable": true},
-  		{"searchable": true},
-  		{"searchable": true},
-  		{"searchable": false},
-  	  ],
-  	  "lengthMenu": [ [-1, 10, 20, 30], ["Todos", 10, 20, 30] ] // defina quantidade de linhas para exibir
-  	})
-   });
+<script type="text/javascript">
+	function Editar(){
+	  var par = $(this).parent().parent(); //tr
+ 	  var tdHostname = par.children("td:nth-child(1)");
+	  var tdDepartamento = par.children("td:nth-child(2)");
+	  var tdUsuario = par.children("td:nth-child(3)");
+	 
+	  tdHostname.html("<input type='text' id='txtNome' value='"+tdHostname.html()+"'/>");
+	  tdDepartamento.html("<input type='text' id='txtTelefone' value='"+tdDepartamento.html()+"'/>");
+	  tdUsuario.html("<input type='text' id='txtEmail' value='"+tdUsuario.html()+"'/>");
+	 
+	  $(".btnEditar").bind("click", Editar);
+	};
+	$(function(){
+	    $(".btnEditar").bind("click", Editar);
+	 
+	});
 </script>
+
 </body>
 </html>

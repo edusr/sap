@@ -189,20 +189,22 @@
         <div class="box-header with-border">
            <h3 class="box-title">Host</h3>
         </div>
-		<form role="form">
+		<form role="form"">
           <div class="box-body">
             <div class="row">
+              <div class="col-xs-2">
+                <label>Tipo</label>
+                <select class="form-control">
+            	    <option hidden="true"></option>
+	              	<option>Desktop</option>
+	              	<option>Notebook</option>
+	            </select>
+              </div>
               <div class="col-xs-2 has-error">
                 <label>Hostname</label>
                 <input style="text-transform:uppercase;" type="text" class="form-control" id="hostname" placeholder="INF-000">
                 <span class="help-block">Hostname em uso</span>
               </div>
-              <div class="col-xs-2 has-error">
-                <label>Endereço Mac</label>
-                <input class="form-control" style="text-transform:uppercase;" id="macAddress" type="text" maxlength="17">
-                <span class="help-block">Endereço mac em uso</span>
-              </div>
-              <!-- select -->
 	          <div class="col-xs-2">
             	<label>Departamento</label>
             	<select class="form-control">
@@ -215,7 +217,80 @@
 	              	<option>Comercial</option>
             	</select>
           	  </div>
+          	  <div class="col-xs-3">
+          	    <label>Usuário responsável</label>
+          	    <input type="text" class="form-control">
+          	  </div>
             </div>
+	        <div class="with-border">
+	           <h3>Configurações</h3>
+	        </div>
+            <div class="row">
+              <div class="col-xs-2 has-error">
+                <label>Endereço Mac</label>
+                <input class="form-control" style="text-transform:uppercase;" id="macAddress" type="text" maxlength="17">
+                <span class="help-block">Endereço mac em uso</span>
+              </div>
+              <div class="col-xs-3">
+              	<label>Sistema Operacional</label>
+              	<select class="form-control">
+            	    <option hidden="true"></option>
+            	    <option>Windows XP</option>
+	              	<option>Windows 7 Professional</option>
+	              	<option>Windows 7 Starter</option>
+	              	<option>Windows 7 Ultimate</option>
+	              	<option>Windows 8</option>
+	              	<option>Windows 8.1</option>
+	              	<option>Windows 10</option>
+	              	<option>Linux</option>
+            	</select>
+              </div>
+              <div class="col-xs-2">
+              	<label>Arquitetura</label>
+              	<select class="form-control">
+            	    <option hidden="true"></option>
+	              	<option>64 bits</option>
+	              	<option>32 bits</option>
+            	</select>
+              </div>
+              <div class="col-xs-3">
+                <label>Chave de Licença</label>
+                <input type="text" class="form-control">
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-xs-2">
+              	<label>Processador</label>
+              	<select class="form-control">
+            	    <option hidden="true"></option>
+	              	<option>Atom</option>
+	              	<option>Celeron</option>
+	              	<option>Core 2 Duo</option>
+	              	<option>Core 2 Quad</option>
+	              	<option>Duo Core</option>
+	              	<option>Quad Core</option>
+	              	<option>Core i3</option>
+	              	<option>Core i5</option>
+	              	<option>Core i7</option>
+            	</select>
+              </div>
+              <div class="col-xs-2">
+              	<label>Memória RAM</label>
+              	<select class="form-control">
+            	    <option hidden="true"></option>
+	              	<option>2 GB</option>
+	              	<option>4 GB</option>
+	              	<option>6 GB</option>
+	              	<option>8 GB</option>
+	              	<option>12 GB</option>
+	              	<option>16 GB</option>
+	              	<option>24 GB</option>
+	              	<option>32 GB</option>
+            	</select>
+              </div>
+            </div>
+            <br>
             <div class="row">
               <div class="col-xs-2">
                 <button class="btn btn-info" type="submit">Salvar</button>
