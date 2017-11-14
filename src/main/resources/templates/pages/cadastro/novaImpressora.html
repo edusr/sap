@@ -29,7 +29,7 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue-light sidebar-mini">
 <div class="wrapper">
 
   <header class="main-header">
@@ -182,21 +182,21 @@
         <div class="box-header with-border">
            <h3 class="box-title">Impressora</h3>
         </div>
-		<form role="form" th:action="@{/impressora/salvar}">
+		<form role="form" th:action="@{/impressora/salvar}" method="POST" th:object="${impressora}">
           <div class="box-body">
             <div class="row">
               <div class="col-xs-2 has-error">
                 <label>Nome</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" th:field="*{nome}">
                 <span class="help-block">Impressora já existe</span>
               </div>
               <div class="col-xs-2">
                 <label>Modelo</label>
-                <input class="form-control" type="text">
+                <input class="form-control" type="text" th:field="*{modelo}">
               </div>
 	          <div class="col-xs-2 has-error">
                 <label>IP</label>
-				<input type="text" class="form-control">
+				<input type="text" class="form-control" th:field="*{ip}">
 				<span class="help-block">IP já está em uso</span>
               </div>
             </div>

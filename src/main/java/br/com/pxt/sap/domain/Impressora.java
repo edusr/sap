@@ -1,13 +1,20 @@
 package br.com.pxt.sap.domain;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="timpressora")
 public class Impressora implements Serializable {
 
 	/**
@@ -21,8 +28,11 @@ public class Impressora implements Serializable {
 	private String nome;
 	private String modelo;
 	private String ip;
-	@OneToMany
-	private List<Departamento> departamentos;
+	@ElementCollection(targetClass = Departamento.class) 
+	@CollectionTable(name = "timpdepto",
+	    joinColumns = @JoinColumn(name = "id_imp"))
+	@Column(name = "id_depto")
+	private Set<Departamento> departamento;
 	private Tonner Tonner;
 
 	public Long getId() {
@@ -57,12 +67,12 @@ public class Impressora implements Serializable {
 		this.ip = ip;
 	}
 
-	public List<Departamento> getDepartamentos() {
-		return departamentos;
+	public Set<Departamento> getDepartamento() {
+		return departamento;
 	}
 
-	public void setDepartamentos(List<Departamento> departamentos) {
-		this.departamentos = departamentos;
+	public void setDepartamento(Set<Departamento> departamento) {
+		this.departamento = departamento;
 	}
 
 	public Tonner getTonner() {
