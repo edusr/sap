@@ -1,0 +1,54 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+ 
+			<form th:action="@{/impressora/salvar}" method="POST" th:object="${impressora}" th:fragment="formImpressora">
+	          <div class="box-body">
+	            <div class="row">
+	              <div class="col-xs-2 has-error">
+	                <label>Nome</label>
+	                <input type="text" class="form-control input-sm input-sm" th:field="*{nome}"></input>
+	                <span class="help-block">Impressora já existe</span>
+	              </div>
+	              <div class="col-xs-2">
+	                <label>Modelo</label>
+	                <input class="form-control input-sm" type="text" th:field="*{modelo}"></input>
+	              </div>
+		          <div class="col-xs-2 has-error">
+	                <label>IP</label>
+					<input type="text" class="form-control input-sm" th:field="*{ip}"></input>
+					<span class="help-block">IP já está em uso</span>
+	              </div>
+	            </div>
+	            <div class="row">
+	              <div class="col-xs-2">
+	            	<label>Departamento</label>
+	            	<select multiple="multiple" class="form-control input-sm" th:field="*{departamento}">
+		              	<option th:each="departamento : ${departamento}" th:value="${departamento}" th:text="${departamento.descricao}"></option>
+	            	</select>
+	          	  </div>
+	              <div class="col-xs-2">
+	                <label>Modelo de Tonner</label>
+	                <select class="form-control input-sm">
+	            	    <option hidden="true"></option>
+		              	<option>264X</option>
+		              	<option>16548E</option>
+		              	<option>64A</option>
+		              	<option>755S</option>
+		              	<option>1547W</option>
+		              	<option>352W</option>
+	            	</select>
+	              </div>
+	            </div>
+	            <br></br>
+	            <div class="row">
+	              <div class="col-xs-2">
+	                <button class="btn btn-info" type="submit">Salvar</button>
+	                <button class="btn btn-danger" type="reset">Limpar</button>
+	              </div>
+	            </div>
+	          </div>
+	        </form>
+
+
+</html>

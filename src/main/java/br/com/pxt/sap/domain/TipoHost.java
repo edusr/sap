@@ -1,25 +1,37 @@
 package br.com.pxt.sap.domain;
 
-public enum TipoHost {
+import java.io.Serializable;
 
-	DESKTOP(1, "Desktop"),
-	NOTEBOOK(2, "Notebook"),
-	ALL_IN_ONE(3, "All in One");
-	
-	public int valor;
-	public String descricao;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-	TipoHost(int valor, String descricao) {
-		this.valor = valor;
+@Entity
+@Table(name = "ttiphost")
+public class TipoHost implements Serializable {
+
+	private static final long serialVersionUID = 2353076465355290737L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long id;
+	private String descricao;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
-	public int getValor() {
-		return this.valor;
-	}
-	
-	public String getDescricao() {
-		return this.descricao;
-	}
-	
 }

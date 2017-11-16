@@ -1,0 +1,80 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+		<form th:action="@{/host/salvar}" th:object="${host}" method="POST" th:fragment="formHost">
+          <div class="box-body">
+            <div class="row">
+              <div class="col-xs-2">
+                <label>Tipo</label>
+                <select class="form-control input-sm" th:field="*{tipoHost.descricao}">
+	              	<option th:each="tphost : ${tphost}" th:value="${tphost}" th:text="${tphost.descricao}"></option>
+	            </select>
+              </div>
+              <div class="col-xs-2 has-error">
+                <label>Hostname</label>
+                <input th:field="*{hostname}" style="text-transform:uppercase;" type="text" class="form-control input-sm" placeholder="INF-000 / INFNB-000">
+                <span class="help-block">Hostname em uso</span>
+              </div>
+	          <div class="col-xs-2">
+            	<label>Departamento</label>
+            	<select class="form-control input-sm" th:field="*{departamento}">
+            		<option label="Selecione" value=""></option>
+	              	<option th:each="departamento : ${departamento}" th:value="${departamento}" th:text="${departamento.descricao}"></option>
+            	</select>
+          	  </div>
+          	  <div class="col-xs-3">
+          	    <label>Utilizador</label>
+          	    <input type="text" class="form-control input-sm" th:field="*{utilizador}">
+          	  </div>
+            </div>
+	        <div class="with-border">
+	           <h3>Configurações</h3>
+	        </div>
+            <div class="row">
+              <div class="col-xs-2 has-error">
+                <label>Endereço Mac</label>
+                <input class="form-control input-sm" style="text-transform:uppercase;" id="macAddress" type="text" maxlength="17" th:field="*{enderecoMac}">
+                <span class="help-block">Endereço mac em uso</span>
+              </div>
+              <div class="col-xs-3">
+              	<label>Sistema Operacional</label>
+              	<select class="form-control input-sm" th:field="*{versaoSO}">
+	              	<option th:each="versao : ${versao}" th:value="${versao}" th:text="${versao.descricao}"></option>
+            	</select>
+              </div>
+              <div class="col-xs-2">
+              	<label>Arquitetura</label>
+              	<select class="form-control input-sm" th:field="*{arquiteturaSO}">
+	              	<option th:each="arqso : ${arqso}" th:value="${arqso}" th:text="${arqso.descricao}"></option>
+            	</select>
+              </div>
+              <div class="col-xs-3">
+                <label>Chave de Licença</label>
+                <input type="text" class="form-control input-sm" th:field="*{chaveLicenca}">
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-xs-2">
+              	<label>Processador</label>
+              	<select class="form-control input-sm" th:field="*{processador}">
+	              	<option th:each="processador : ${processador}" th:value="${processador}" th:text="${processador.descricao}"></option>
+            	</select>
+              </div>
+              <div class="col-xs-2">
+              	<label>Memória RAM</label>
+              	<select class="form-control input-sm" th:field="*{memoriaRam}">
+	              	<option th:each="ram : ${ram}" th:value="${ram}" th:text="${ram.descricao}"></option>
+            	</select>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-xs-2">
+                <button class="btn btn-info" type="submit">Salvar</button>
+                <button class="btn btn-danger" type="reset">Limpar</button>
+              </div>
+            </div>
+          </div>
+        </form>
+</html>

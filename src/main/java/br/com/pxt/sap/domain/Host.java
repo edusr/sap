@@ -32,7 +32,6 @@ public class Host implements Serializable {
 
 	@Column(name = "tipo")
 	@NotBlank
-	@Enumerated(EnumType.STRING)
 	private TipoHost tipoHost;
 
 	@Column(name = "depto")
