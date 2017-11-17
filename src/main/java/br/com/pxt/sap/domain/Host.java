@@ -9,6 +9,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -26,17 +29,16 @@ public class Host implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank
 	@Column(length = 9)
+	@NotBlank
 	private String hostname;
 
-	@Column(name = "tipo")
-	@NotBlank
+	@ManyToOne(targetEntity=TipoHost.class)
+	@JoinColumn(name = "id_tiphost", referencedColumnName = "id")
 	private TipoHost tipoHost;
 
-	@Column(name = "depto")
-	@NotBlank
-	@Enumerated(EnumType.STRING)
+	@ManyToOne(targetEntity=Departamento.class)
+	@JoinColumn(name = "id_depto", referencedColumnName = "id")
 	private Departamento departamento;
 
 	@Column(name = "utilizador")
@@ -46,24 +48,21 @@ public class Host implements Serializable {
 	@NotBlank
 	private String enderecoMac;
 
-	@Column(name = "vrssisoperacional")
-	@Enumerated(EnumType.STRING)
-	@NotBlank
-	private VersaoSO versaoSO;
+	@ManyToOne(targetEntity=SistemaOperacional.class)
+	@JoinColumn(name = "id_sisope", referencedColumnName = "id")
+	private SistemaOperacional sistemaOperacional;
 
-	@Column(name = "arquiteturaso")
-	@NotBlank
+	@ManyToOne(targetEntity=ArquiteturaSO.class)
+	@JoinColumn(name = "id_arquitetso", referencedColumnName = "id")
 	private ArquiteturaSO arquiteturaSO;
 
 	@Column(name = "chvlicso", length = 29)
 	private String chaveLicenca;
 
-	@Column(name = "memram")
-	@Enumerated(EnumType.STRING)
-	@NotBlank
+	@OneToOne(targetEntity=MemoriaRam.class)
 	private MemoriaRam memoriaRam;
 
-	@NotBlank
+	@OneToOne(targetEntity=Processador.class)
 	private Processador processador;
 
 	@Column(name = "status")
@@ -118,12 +117,12 @@ public class Host implements Serializable {
 		this.enderecoMac = enderecoMac;
 	}
 
-	public VersaoSO getVersaoSO() {
-		return versaoSO;
+	public SistemaOperacional getSistemaOperacional() {
+		return sistemaOperacional;
 	}
 
-	public void setVersaoSO(VersaoSO versaoSO) {
-		this.versaoSO = versaoSO;
+	public void setSistemaOperacional(SistemaOperacional sistemaOperacional) {
+		this.sistemaOperacional = sistemaOperacional;
 	}
 
 	public ArquiteturaSO getArquiteturaSO() {

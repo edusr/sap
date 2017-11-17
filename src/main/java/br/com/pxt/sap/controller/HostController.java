@@ -2,6 +2,7 @@ package br.com.pxt.sap.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,6 +41,7 @@ public class HostController {
 		return mv;
 	}*/
 
+	@Transactional
 	@PostMapping(value="/salvar")
 	public String prepararFormulario(@ModelAttribute("host") Host host) {
 		host.setStatusHost(StatusHost.ATIVO);

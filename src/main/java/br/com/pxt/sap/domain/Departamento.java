@@ -1,35 +1,66 @@
+
 package br.com.pxt.sap.domain;
 
-public enum Departamento {
+import java.io.Serializable;
+import java.util.List;
 
-	TI(0, "TI"),
-	CONTROLADORIA(1, "Controladoria"),
-	JURIDICO(2, "Jurídico"),
-	LOGISTICA(3, "Logística"),
-	FINANCEIRO(4, "Financeiro"),
-	RH(5, "RH"),
-	COMERCIAL(6, "Comercial"),
-	MANUTENCAO(7, "Manutenção"),
-	ARMAZEM(8, "Armazém"),
-	RESTAURANTE(9, "Restaurante"),
-	DISKCENTER(10, "Disk Center"),
-	CEDOC(11, "Cedoc"),
-	DIRETORIA(12, "Diretoria");
-	
-	public int valor;
-	public String descricao;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-	Departamento(int valor, String descricao) {
-		this.valor = valor;
-		this.descricao = descricao;
+@Entity
+@Table(name = "tdepartamento")
+public class Departamento implements Serializable {
+
+	private static final long serialVersionUID = 7323054751293011802L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	@Column(name = "nomdepto")
+	private String nomeDepartamento;
+	@ManyToOne
+	@JoinColumn(name = "id_imp", referencedColumnName = "id", nullable = true)
+	private Impressora impressora;
+	@OneToMany(targetEntity=Host.class, mappedBy="departamento")
+	private List<Host> host;
+
+	public Long getId() {
+		return id;
 	}
-	
-	public int getValor() {
-		return this.valor;
+
+	public void setId(Long id) {
+		this.id = id;
 	}
-	
-	public String getDescricao() {
-		return this.descricao;
+
+	public String getNomeDepartamento() {
+		return nomeDepartamento;
 	}
-	
+
+	public void setNomeDepartamento(String nomeDepartamento) {
+		this.nomeDepartamento = nomeDepartamento;
+	}
+
+	public Impressora getImpressora() {
+		return impressora;
+	}
+
+	public void setImpressora(Impressora impressora) {
+		this.impressora = impressora;
+	}
+
+	public List<Host> getHost() {
+		return host;
+	}
+
+	public void setHost(List<Host> host) {
+		this.host = host;
+	}
+
 }

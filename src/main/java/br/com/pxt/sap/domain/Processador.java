@@ -1,34 +1,43 @@
 package br.com.pxt.sap.domain;
 
-public enum Processador {
+import java.io.Serializable;
 
-	ATOM(1,"Atom"),
-	CELERON(2,"Celeron"),
-	PENTIUM_I(3,"Pentium I"),
-	PENTIUM_II(4,"Pentium II"),
-	PENTIUM_III(5,"Pentium III"),
-	PENTIUM_IV(6,"Pentium IV"),
-	DUO_CORE(7,"Duo Core"),
-	QUAD_CORE(8,"Quad Core"),
-	CORE_2_DUO(9,"Core 2 Duo"),
-	CORE_2_QUAD(10,"Core 2 Quad"),
-	CORE_I3(11,"Core i3"),
-	CORE_I5(12,"Core i5"),
-	CORE_I7(13,"Core i7");
-	
-	public int valor;
-	public String descricao;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-	Processador(int valor, String descricao) {
-		this.valor = valor;
-		this.descricao = descricao;
+@Entity
+@Table(name = "tprocessador")
+public class Processador implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1405213350683896812L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	@Column(name = "descproc")
+	private String descricaoProcessador;
+
+	public Long getId() {
+		return id;
 	}
-	
-	public int getValor() {
-		return this.valor;
+
+	public void setId(Long id) {
+		this.id = id;
 	}
-	
-	public String getDescricao() {
-		return this.descricao;
+
+	public String getDescricaoProcessador() {
+		return descricaoProcessador;
 	}
+
+	public void setDescricaoProcessador(String descricaoProcessador) {
+		this.descricaoProcessador = descricaoProcessador;
+	}
+
 }

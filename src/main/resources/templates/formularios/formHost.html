@@ -6,8 +6,8 @@
             <div class="row">
               <div class="col-xs-2">
                 <label>Tipo</label>
-                <select class="form-control input-sm" th:field="*{tipoHost.descricao}">
-	              	<option th:each="tphost : ${tphost}" th:value="${tphost}" th:text="${tphost.descricao}"></option>
+                <select class="form-control input-sm" th:field="*{tipoHost}">
+	              	<option th:each="tphost : ${tphost}" th:value="${tphost.id}" th:text="${tphost.descricao}"></option>
 	            </select>
               </div>
               <div class="col-xs-2 has-error">
@@ -19,7 +19,7 @@
             	<label>Departamento</label>
             	<select class="form-control input-sm" th:field="*{departamento}">
             		<option label="Selecione" value=""></option>
-	              	<option th:each="departamento : ${departamento}" th:value="${departamento}" th:text="${departamento.descricao}"></option>
+	              	<option th:each="departamento : ${departamento}" th:value="${departamento.id}" th:text="${departamento.nomeDepartamento}"></option>
             	</select>
           	  </div>
           	  <div class="col-xs-3">
@@ -38,14 +38,14 @@
               </div>
               <div class="col-xs-3">
               	<label>Sistema Operacional</label>
-              	<select class="form-control input-sm" th:field="*{versaoSO}">
-	              	<option th:each="versao : ${versao}" th:value="${versao}" th:text="${versao.descricao}"></option>
+              	<select class="form-control input-sm" th:field="*{sistemaOperacional}">
+	              	<option th:each="sistemaOperacional : ${sistemaOperacional}" th:value="${sistemaOperacional.id}" th:text="${sistemaOperacional.sistemaOperacional}"></option>
             	</select>
               </div>
               <div class="col-xs-2">
               	<label>Arquitetura</label>
               	<select class="form-control input-sm" th:field="*{arquiteturaSO}">
-	              	<option th:each="arqso : ${arqso}" th:value="${arqso}" th:text="${arqso.descricao}"></option>
+	              	<option th:each="arqso : ${arqso}" th:value="${arqso.id}" th:text="${arqso.descricaoArquitetura}"></option>
             	</select>
               </div>
               <div class="col-xs-3">
@@ -58,13 +58,13 @@
               <div class="col-xs-2">
               	<label>Processador</label>
               	<select class="form-control input-sm" th:field="*{processador}">
-	              	<option th:each="processador : ${processador}" th:value="${processador}" th:text="${processador.descricao}"></option>
+	              	<option th:each="processador : ${processador}" th:value="${processador.id}" th:text="${processador.descricaoProcessador}"></option>
             	</select>
               </div>
               <div class="col-xs-2">
               	<label>Memória RAM</label>
               	<select class="form-control input-sm" th:field="*{memoriaRam}">
-	              	<option th:each="ram : ${ram}" th:value="${ram}" th:text="${ram.descricao}"></option>
+	              	<option th:each="ram : ${ram}" th:value="${ram.id}" th:text="${ram.memRam}"></option>
             	</select>
               </div>
             </div>

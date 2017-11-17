@@ -23,8 +23,8 @@
 	            <div class="row">
 	              <div class="col-xs-2">
 	            	<label>Departamento</label>
-	            	<select multiple="multiple" class="form-control input-sm" th:field="*{departamento}">
-		              	<option th:each="departamento : ${departamento}" th:value="${departamento}" th:text="${departamento.descricao}"></option>
+	            	<select multiple="multiple" class="form-control input-sm" th:field="*{departamento.nomeDepartamento}">
+		              	<option th:each="departamento : ${departamento}" th:value="${departamento}" th:text="${departamento.nomeDepartamento}"></option>
 	            	</select>
 	          	  </div>
 	              <div class="col-xs-2">

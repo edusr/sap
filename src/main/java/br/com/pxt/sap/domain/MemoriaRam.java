@@ -1,27 +1,43 @@
 package br.com.pxt.sap.domain;
 
-public enum MemoriaRam {
+import java.io.Serializable;
 
-	DOIS(1, "2 GB"),
-	QUATRO(2, "4 GB"),
-	SEIS(3, "6 GB"),
-	OITO(4, "8 GB"),
-	DOZE(5, "12 GB"),
-	DEZESSEIS(6, "16 GB");
-	
-	public int valor;
-	public String descricao;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-	MemoriaRam(int valor, String descricao) {
-		this.valor = valor;
-		this.descricao = descricao;
+@Entity
+@Table(name = "tmemram")
+public class MemoriaRam implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1895156977522700185L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	@Column(name = "ram")
+	private String memRam;
+
+	public Long getId() {
+		return id;
 	}
-	
-	public int getValor() {
-		return this.valor;
+
+	public void setId(Long id) {
+		this.id = id;
 	}
-	
-	public String getDescricao() {
-		return this.descricao;
+
+	public String getMemRam() {
+		return memRam;
 	}
+
+	public void setMemRam(String memRam) {
+		this.memRam = memRam;
+	}
+
 }

@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.pxt.sap.domain.ArquiteturaSO;
-import br.com.pxt.sap.domain.Departamento;
 import br.com.pxt.sap.domain.Host;
 import br.com.pxt.sap.domain.Impressora;
-import br.com.pxt.sap.domain.MemoriaRam;
-import br.com.pxt.sap.domain.Processador;
-import br.com.pxt.sap.domain.VersaoSO;
+import br.com.pxt.sap.repository.ArquiteturaSORepository;
+import br.com.pxt.sap.repository.DepartamentoRepository;
+import br.com.pxt.sap.repository.MemoriaRamRepository;
+import br.com.pxt.sap.repository.ProcessadorRepository;
+import br.com.pxt.sap.repository.SistemaOperacionalRepository;
 import br.com.pxt.sap.repository.TipoHostRepository;
 
 @Controller
@@ -20,6 +20,11 @@ import br.com.pxt.sap.repository.TipoHostRepository;
 public class CadastroController {
 
 	@Autowired private TipoHostRepository tipoHostRepo;
+	@Autowired private ArquiteturaSORepository arquiteturaSORepo;
+	@Autowired private DepartamentoRepository departamentoRepo;
+	@Autowired private SistemaOperacionalRepository sistemaOperacionalRepo;
+	@Autowired private MemoriaRamRepository memoriaRamRepo;
+	@Autowired private ProcessadorRepository processadorRepo;
 	
 	@GetMapping
 	public ModelAndView carregarObjetos() {
@@ -28,15 +33,15 @@ public class CadastroController {
 		// Objetos para cadastro de Host
 		mv.addObject("host", new Host());
 		mv.addObject("tphost", tipoHostRepo.findAll());
-		mv.addObject("departamento", Departamento.values());
-		mv.addObject("arqso", ArquiteturaSO.values());
-		mv.addObject("versao", VersaoSO.values());
-		mv.addObject("processador", Processador.values());
-		mv.addObject("ram", MemoriaRam.values());
+		mv.addObject("departamento", departamentoRepo.findAll());
+		mv.addObject("arqso", arquiteturaSORepo.findAll());
+		mv.addObject("sistemaOperacional", sistemaOperacionalRepo.findAll());
+		mv.addObject("processador", processadorRepo.findAll());
+		mv.addObject("ram", memoriaRamRepo.findAll());
 		
 		// Objetos para cadastro de impressora
 		mv.addObject("impressora", new Impressora());
-		mv.addObject("departamento", Departamento.values());
+		mv.addObject("departamento", departamentoRepo.findAll());
 		
 		
 		return mv;

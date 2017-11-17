@@ -1,6 +1,6 @@
 package br.com.pxt.sap.domain;
 
-public enum VersaoSO {
+public enum VersaoSO1 {
 
 	WINDOWS_XP(1, "Windows XP"),
 	WINDOWS_VISTA(2, "Windows XP"),
@@ -16,7 +16,7 @@ public enum VersaoSO {
 	public int valor;
 	public String descricao;
 
-	VersaoSO(int valor, String descricao) {
+	VersaoSO1(int valor, String descricao) {
 		this.valor = valor;
 		this.descricao = descricao;
 	}

@@ -1,23 +1,52 @@
 package br.com.pxt.sap.domain;
 
-public enum ArquiteturaSO {
+import java.io.Serializable;
+import java.util.List;
 
-	TRINTA_E_DOIS_BITS(1, "32 bits"),
-	SESSENTA_E_QUATRO_BITS(2, "64 bits");
-	
-	public int valor;
-	public String descricao;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-	ArquiteturaSO(int valor, String descricao) {
-		this.valor = valor;
-		this.descricao = descricao;
+@Entity
+@Table(name = "tarquiteturaso")
+public class ArquiteturaSO implements Serializable {
+
+	private static final long serialVersionUID = -4714730943878524881L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	@Column(name = "descarquitt")
+	private String descricaoArquitetura;
+	@OneToMany(targetEntity=Host.class, mappedBy="arquiteturaSO")
+	private List<Host> host;
+
+	public Long getId() {
+		return id;
 	}
-	
-	public int getValor() {
-		return this.valor;
+
+	public void setId(Long id) {
+		this.id = id;
 	}
-	
-	public String getDescricao() {
-		return this.descricao;
+
+	public String getDescricaoArquitetura() {
+		return descricaoArquitetura;
 	}
+
+	public void setDescricaoArquitetura(String descricaoArquitetura) {
+		this.descricaoArquitetura = descricaoArquitetura;
+	}
+
+	public List<Host> getHost() {
+		return host;
+	}
+
+	public void setHost(List<Host> host) {
+		this.host = host;
+	}
+
 }
