@@ -2,51 +2,71 @@ package br.com.pxt.sap.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.pxt.sap.domain.HardDisk;
 import br.com.pxt.sap.domain.Host;
-import br.com.pxt.sap.domain.StatusHost;
-import br.com.pxt.sap.repository.HostRepository;
+import br.com.pxt.sap.repository.ArquiteturaSORepository;
+import br.com.pxt.sap.repository.DepartamentoRepository;
+import br.com.pxt.sap.repository.MemoriaRamRepository;
+import br.com.pxt.sap.repository.ProcessadorRepository;
+import br.com.pxt.sap.repository.SistemaOperacionalRepository;
+import br.com.pxt.sap.repository.TipoHostRepository;
+import br.com.pxt.sap.service.HostServiceImpl;
 
 @Controller
 @RequestMapping(value="/host")
 public class HostController {
 
-	@Autowired private HostRepository hostRepo;
+	@Autowired HostServiceImpl hostService;
+	@Autowired private TipoHostRepository tipoHostRepo;
+	@Autowired private ArquiteturaSORepository arquiteturaSORepo;
+	@Autowired private DepartamentoRepository departamentoRepo;
+	@Autowired private SistemaOperacionalRepository sistemaOperacionalRepo;
+	@Autowired private MemoriaRamRepository memoriaRamRepo;
+	@Autowired private ProcessadorRepository processadorRepo;
 
 	@GetMapping(value="/consulta")
 	public ModelAndView construirTabela() {
 		ModelAndView mv = new ModelAndView("pages/host/listHost");
-		mv.addObject("hosts", hostRepo.findAll());
+		mv.addObject("hosts", hostService.findAll());
+		mv.addObject("hostSelecionado", hostService.findAll().get(0));
 		return mv;
 	}
 
-	// Substituido pelo novo cadastro direcioando pelo CadastroController
-/*	@GetMapping(value="/novo")
-	public ModelAndView prepararFormulario() {
-		ModelAndView mv = new ModelAndView("pages/cadastro/novoHost");
-		mv.addObject("host", new Host());
-		mv.addObject("tphost", TipoHost.values());
-		mv.addObject("departamento", Departamento.values());
-		mv.addObject("arqso", ArquiteturaSO.values());
-		mv.addObject("versao", VersaoSO.values());
-		mv.addObject("processador", Processador.values());
-		mv.addObject("ram", MemoriaRam.values());
-		
+	@GetMapping(value="/consulta/{hostname}")
+	public ModelAndView listaComHostSelecionado(@PathVariable("hostname") String hostname) {
+		ModelAndView mv = new ModelAndView("pages/host/listHost");
+		mv.addObject("hostSelecionado", hostService.buscaPorHostname(hostname));
+		mv.addObject("hosts", hostService.findAll());
 		return mv;
-	}*/
-
-	@Transactional
+	}
+	
 	@PostMapping(value="/salvar")
 	public String prepararFormulario(@ModelAttribute("host") Host host) {
-		host.setStatusHost(StatusHost.ATIVO);
-		hostRepo.save(host);
+		hostService.save(host);
 		return "redirect:/novo";
+	}
+	
+	@GetMapping(value="/editar/{hostname}")
+	public ModelAndView detalheDoHost(@PathVariable("hostname") String hostname) {
+		ModelAndView mv = new ModelAndView("pages/host/editarHost");
+		
+		mv.addObject("host", hostService.buscaPorHostname(hostname));
+		mv.addObject("tphost", tipoHostRepo.findAll());
+		mv.addObject("departamento", departamentoRepo.findAll());
+		mv.addObject("arqso", arquiteturaSORepo.findAll());
+		mv.addObject("sistemaOperacional", sistemaOperacionalRepo.findAll());
+		mv.addObject("processador", processadorRepo.findAll());
+		mv.addObject("ram", memoriaRamRepo.findAll());
+		mv.addObject("hds", HardDisk.values());
+		
+		return mv;
 	}
 	
 }

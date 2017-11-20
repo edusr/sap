@@ -1,18 +1,15 @@
 package br.com.pxt.sap.domain;
 
-public enum MemoriaRam1 {
+public enum HardDisk {
 
-	DOIS(1, "2 GB"),
-	QUATRO(2, "4 GB"),
-	SEIS(3, "6 GB"),
-	OITO(4, "8 GB"),
-	DOZE(5, "12 GB"),
-	DEZESSEIS(6, "16 GB");
+	_320GB(1, "320 GB"),
+	_500GB(2, "500 GB"),
+	_1000GB(3, "1000 GB");
 	
 	public int valor;
 	public String descricao;
 
-	MemoriaRam1(int valor, String descricao) {
+	HardDisk(int valor, String descricao) {
 		this.valor = valor;
 		this.descricao = descricao;
 	}

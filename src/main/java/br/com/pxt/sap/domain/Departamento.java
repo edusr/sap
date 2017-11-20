@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,7 +27,7 @@ public class Departamento implements Serializable {
 	@Column(name = "nomdepto")
 	private String nomeDepartamento;
 	@ManyToOne
-	@JoinColumn(name = "id_imp", referencedColumnName = "id", nullable = true)
+	@JoinColumn(name = "id_imp", referencedColumnName = "id", nullable = true, foreignKey = @ForeignKey(name = "fk_departamentoImpressora"))
 	private Impressora impressora;
 	@OneToMany(targetEntity=Host.class, mappedBy="departamento")
 	private List<Host> host;

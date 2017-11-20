@@ -13,7 +13,7 @@
 	      <div class="col-md-9">
 	       <div class="box box-primary">
 	         <div class="box-header with-border">
-	         	<a th:href="@{/hosts/novo}">
+	         	<a th:href="@{/novo}">
 	         	  <span class="glyphicon glyphicon-plus"></span>
 	         	  <b>Adicionar</b>
 	         	</a>
@@ -23,19 +23,19 @@
 	         </div>
 	         <!-- /.box-header -->
 	         <div class="box-body">
-	           <table id="example1" class="table table-bordered table-striped">
+	           <table id="thost" class="table table-bordered table-striped">
 	             <thead>
 	               <tr>
 	                 <th>Hostname</th>
 	                 <th>Departamento</th>
 	                 <th>Endereço MAC</th>
-	                 <th style="width: 12%">Status</th>
+	                 <th>Status</th>
 	               </tr>
 	             </thead>
 	             <tbody>
 	                <tr th:each="host : ${hosts}">
-	             	  <td th:text="${host.hostname}"></td>
-	             	  <td th:text="${host.departamento.descricao}"></td>
+	             	  <td><a th:href="@{/host/consulta/} + ${host.hostname}" th:text="${host.hostname}"></a></td>
+	             	  <td th:text="${host.departamento.nomeDepartamento}"></td>
 	             	  <td th:text="${host.enderecoMac}"></td>
 	             	  <td><span th:if="${host.statusHost.valor == 1}" class="label label-success" th:text="${host.statusHost.descricao}"></span></td>
 	             	  <td><span th:if="${host.statusHost.valor == 2}" class="label label-primary" th:text="${host.statusHost.descricao}"></span></td>
@@ -58,68 +58,72 @@
 	          <!-- Profile Image -->
 	          <div class="box box-primary">
 	            <div class="box-body box-profile">
-	              <h1 class="text-center">INF-001</h1>
+	              <h1 class="text-center" th:text="${hostSelecionado.hostname}"></h1>
 	
 	              <ul class="list-group list-group-unbordered">
 	                <li class="list-group-item">
-	                  <b>Departamento</b> <a class="pull-right">TI</a>
+	                  <b>Departamento</b> <a class="pull-right" th:text="${hostSelecionado.departamento.nomeDepartamento}"></a>
 	                </li>
 	                <li class="list-group-item">
-	                  <b>Utilizador</b> <a class="pull-right">Matheus Maske</a>
+	                  <b>Utilizador</b> <a class="pull-right" th:text="${hostSelecionado.utilizador}"></a>
 	                </li>
 	                <li class="list-group-item">
-	                  <b>Endereço MAC</b> <a class="pull-right">48-5B-39-F8-68-20</a>
+	                  <b>Endereço MAC</b> <a class="pull-right" th:text="${hostSelecionado.enderecoMac}"></a>
 	                </li>
 	                <li class="list-group-item">
-	                  <b>S.O.</b> <a class="pull-right">Windows 10 64 bits</a>
+	                  <b>S.O.</b> <a class="pull-right" th:text="${hostSelecionado.sistemaOperacional.sistemaOperacional + ' ' + hostSelecionado.arquiteturaSO.descricaoArquitetura}"></a>
 	                </li>
 	                <li class="list-group-item">
-	                  <b>Chave de Licença S.O.</b> <br><a>51A51-51A51-51A51-51A51-51A51</a>
+	                  <b>Chave de Licença S.O.</b> <br><a th:text="${hostSelecionado.chaveLicenca}"></a>
 	                </li>
 	                <li class="list-group-item">
-	                  <b>Processador</b> <a class="pull-right">Core i5</a>
+	                  <b>Processador</b> <a class="pull-right" th:text="${hostSelecionado.processador.descricaoProcessador}"></a>
 	                </li>
 	                <li class="list-group-item">
-	                  <b>RAM</b> <a class="pull-right">8 GB</a>
+	                  <b>RAM</b> <a class="pull-right" th:text="${hostSelecionado.memoriaRam.memRam}"></a>
+	                </li>
+	                <li class="list-group-item">
+	                  <b>HD</b> <a class="pull-right" th:text="${hostSelecionado.hd}"></a>
 	                </li>
 	              </ul>
+	                <b>Editar</b><a class="pull-right" th:href="@{/host/editar/} + ${hostSelecionado.hostname}"><span class="glyphicon glyphicon-pencil"></span></a>
 	            </div>
-	            <!-- /.box-body -->
+	            
 	          </div>
-	          <!-- /.box -->
+	          
 	
 	        </div>
 	    </section>
 
     </section>
   
-
-<script>
-
-  $(function () {
-    $('#example1').DataTable({
-  	  "language": { //altera informações da tabela para português
-  	    "paginate": {
-  	      "previous": "Anterior",
-  	      "next": "Próximo"
-  	    },
-  	    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
-  	    "search": "Buscar:",
-  	    "lengthMenu": "Ver _MENU_ registros",
-  	    "zeroRecords": "Nenhum registro encontrado",
-  	    "infoEmpty": "",
-  	    "infoFiltered":   "",
-  	    "searchPlaceholder": "Hostname, Depto, MAC"
-  	  },
-  	  "columns": [ //altera as colunas que são pesquisáveis
-  		{"searchable": true},
-  		{"searchable": true},
-  		{"searchable": true},
-  		{"searchable": false},
-  	  ],
-  	  "lengthMenu": [ [-1, 10, 20, 30], ["Todos", 10, 20, 30] ] // defina quantidade de linhas para exibir
-  	})
-   });
-</script>
+<th:block layout:fragment="javascript-extra">
+	<script>
+	  $(function () {
+	    $('#thost').DataTable({
+	  	  "language": { //altera informações da tabela para português
+	  	    "paginate": {
+	  	      "previous": "Anterior",
+	  	      "next": "Próximo"
+	  	    },
+	  	    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+	  	    "search": "Buscar:",
+	  	    "lengthMenu": "Ver _MENU_ registros",
+	  	    "zeroRecords": "Nenhum registro encontrado",
+	  	    "infoEmpty": "",
+	  	    "infoFiltered":   "",
+	  	    "searchPlaceholder": "Hostname, Depto, MAC"
+	  	  },
+	  	  "columns": [ //altera as colunas que são pesquisáveis
+	  		{"searchable": true},
+	  		{"searchable": true},
+	  		{"searchable": true},
+	  		{"searchable": false},
+	  	  ],
+	  	  "lengthMenu": [ [-1, 10, 20, 30], ["Todos", 10, 20, 30] ] // defina quantidade de linhas para exibir
+	  	})
+	   });
+	</script>
+</th:block>
 </body>
 </html>

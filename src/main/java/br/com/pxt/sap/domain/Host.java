@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -33,12 +35,14 @@ public class Host implements Serializable {
 	@NotBlank
 	private String hostname;
 
-	@ManyToOne(targetEntity=TipoHost.class)
-	@JoinColumn(name = "id_tiphost", referencedColumnName = "id")
+	@ManyToOne(targetEntity = TipoHost.class)
+	@JoinColumn(name = "id_tiphost", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_hostTipoHost"))
+	@NotNull(message = "Tipo não selecionado!")
 	private TipoHost tipoHost;
 
-	@ManyToOne(targetEntity=Departamento.class)
-	@JoinColumn(name = "id_depto", referencedColumnName = "id")
+	@ManyToOne(targetEntity = Departamento.class)
+	@JoinColumn(name = "id_depto", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_hostDepartamento"))
+	@NotNull(message = "Departamento não informado!")
 	private Departamento departamento;
 
 	@Column(name = "utilizador")
@@ -48,22 +52,31 @@ public class Host implements Serializable {
 	@NotBlank
 	private String enderecoMac;
 
-	@ManyToOne(targetEntity=SistemaOperacional.class)
-	@JoinColumn(name = "id_sisope", referencedColumnName = "id")
+	@ManyToOne(targetEntity = SistemaOperacional.class)
+	@JoinColumn(name = "id_sisope", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_hostSO"))
+	@NotNull(message = "Sistema operacional não informado!")
 	private SistemaOperacional sistemaOperacional;
 
-	@ManyToOne(targetEntity=ArquiteturaSO.class)
-	@JoinColumn(name = "id_arquitetso", referencedColumnName = "id")
+	@ManyToOne(targetEntity = ArquiteturaSO.class)
+	@JoinColumn(name = "id_arquitetso", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_hostArquitetura"))
+	@NotNull(message = "Arquitetura não informada!")
 	private ArquiteturaSO arquiteturaSO;
 
 	@Column(name = "chvlicso", length = 29)
 	private String chaveLicenca;
 
-	@OneToOne(targetEntity=MemoriaRam.class)
+	@OneToOne(targetEntity = MemoriaRam.class)
+	@JoinColumn(name = "id_memram", foreignKey = @ForeignKey(name = "fk_hostMemoriaRam"))
+	@NotNull(message = "Memória RAM não informado!")
 	private MemoriaRam memoriaRam;
 
-	@OneToOne(targetEntity=Processador.class)
+	@OneToOne(targetEntity = Processador.class)
+	@JoinColumn(name = "id_processador", foreignKey = @ForeignKey(name = "fk_hostProcessador"))
+	@NotNull(message = "Processador não informado!")
 	private Processador processador;
+
+	@Column(name = "hd")
+	private String hd;
 
 	@Column(name = "status")
 	@Enumerated(EnumType.STRING)
@@ -155,6 +168,14 @@ public class Host implements Serializable {
 
 	public void setProcessador(Processador processador) {
 		this.processador = processador;
+	}
+
+	public String getHd() {
+		return hd;
+	}
+
+	public void setHd(String hd) {
+		this.hd = hd;
 	}
 
 	public StatusHost getStatusHost() {

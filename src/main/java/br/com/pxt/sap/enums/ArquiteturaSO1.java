@@ -1,4 +1,4 @@
-package br.com.pxt.sap.domain;
+package br.com.pxt.sap.enums;
 
 public enum ArquiteturaSO1 {
 

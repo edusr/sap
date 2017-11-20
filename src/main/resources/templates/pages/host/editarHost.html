@@ -1,0 +1,232 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="'layout/default'">
+<head>
+<title>Sistema Apoio a Produção</title>
+</head>
+<body>
+    <section layout:fragment="conteudo">
+
+    <section class="content-header">
+      <h1>
+        Detalhamento do Host
+      </h1>
+    </section>
+
+
+    <section class="content">
+
+        <div class="col-md-3">
+   
+          <div class="box box-primary">
+            <div class="box-body box-profile">
+              <h1 class="text-center" th:text="${host.hostname}"></h1>
+
+              <ul class="list-group list-group-unbordered">
+				<li class="list-group-item">
+                  <b>ID</b> <a class="pull-right" th:text="${host.id}"></a>
+                </li>
+                <li class="list-group-item">
+                  <b>Utilizador</b> <a class="pull-right" th:text="${host.utilizador}"></a>
+                </li>
+                <li class="list-group-item">
+                  <b>Departamento</b> <a class="pull-right" th:text="${host.departamento.nomeDepartamento}"></a>
+                </li>
+              </ul>
+
+              <a th:href="@{/host/consulta/} + ${host.hostname}" class="btn btn-primary"><span class="glyphicon glyphicon-circle-arrow-left"> Voltar</span></a>
+            </div>
+     
+          </div>
+      
+
+        </div>
+     
+        <div class="col-md-9">
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#editar" data-toggle="tab">Editar</a></li>
+              <li><a href="#dadosAntigo" data-toggle="tab">Dados Anteriores</a></li>
+            </ul>
+            <div class="tab-content">
+            <div class="active tab-pane" id="editar">
+              <div class="box-body">
+			    <form th:action="@{/host/salvar}" th:object="${host}" method="POST">
+	                <div class="row">
+	                  <div class="col-xs-2">
+	                    <button class="btn btn-info" type="submit">Salvar alterações</button>
+	                  </div>
+	                </div>
+	                <br>
+		            <div class="row">
+		              <div class="col-xs-2">
+		                <label>Tipo</label>
+		                <select class="form-control input-sm" th:field="*{tipoHost}">
+		                	<option selected th:text="${host.tipoHost.descricao}" th:value="${host.tipoHost.id}"></option>
+			              	<option th:each="tphost : ${tphost}" th:value="${tphost.id}" th:text="${tphost.descricao}"></option>
+			            </select>
+		              </div>
+		              <div class="col-xs-2">
+		                <label>Hostname</label>
+		                <input th:field="*{hostname}" style="text-transform:uppercase;" type="text" class="form-control input-sm" th:placeholder="${host.hostname}">
+		              </div>
+			          <div class="col-xs-3">
+		            	<label>Departamento</label>
+		            	<select class="form-control input-sm" th:field="*{departamento}">
+		            		<option selected th:label="${host.departamento.nomeDepartamento}" th:value="${host.departamento.id}"></option>
+			              	<option th:each="departamento : ${departamento}" th:value="${departamento.id}" th:text="${departamento.nomeDepartamento}"></option>
+		            	</select>
+		          	  </div>
+		          	  <div class="col-xs-3">
+		          	    <label>Utilizador</label>
+		          	    <input type="text" class="form-control input-sm" th:field="*{utilizador}" th:placeholder="${host.utilizador}">
+		          	  </div>
+		            </div>
+			        <div class="with-border">
+			           <h3>Configurações</h3>
+			        </div>
+		            <div class="row">
+		              <div class="col-xs-2">
+		                <label>Endereço Mac</label>
+		                <input class="form-control input-sm" style="text-transform:uppercase;" id="macAddress" type="text" maxlength="17" th:field="*{enderecoMac}" th:placeholder="${host.enderecoMac}">
+		              </div>
+		              <div class="col-xs-4">
+		              	<label>Sistema Operacional</label>
+		              	<select class="form-control input-sm" th:field="*{sistemaOperacional}">
+		              		<option selected th:label="${host.sistemaOperacional.sistemaOperacional}" th:value="${host.sistemaOperacional.id}"></option>
+			              	<option th:each="sistemaOperacional : ${sistemaOperacional}" th:value="${sistemaOperacional.id}" th:text="${sistemaOperacional.sistemaOperacional}"></option>
+		            	</select>
+		              </div>
+		              <div class="col-xs-2">
+		              	<label>Arquitetura</label>
+		              	<select class="form-control input-sm" th:field="*{arquiteturaSO}">
+		              		<option selected th:label="${host.arquiteturaSO.descricaoArquitetura}" th:value="${host.arquiteturaSO.id}"></option>
+			              	<option th:each="arqso : ${arqso}" th:value="${arqso.id}" th:text="${arqso.descricaoArquitetura}"></option>
+		            	</select>
+		              </div>
+		              <div class="col-xs-4">
+		                <label>Chave de Licença</label>
+		                <input type="text" class="form-control input-sm" th:field="*{chaveLicenca}" th:placeholder="${host.chaveLicenca}">
+		              </div>
+		            </div>
+		            <br>
+		            <div class="row">
+		              <div class="col-xs-2">
+		              	<label>Processador</label>
+		              	<select class="form-control input-sm" th:field="*{processador}">
+		              		<option selected th:label="${host.processador.descricaoProcessador}" th:value="${host.processador.id}"></option>
+			              	<option th:each="processador : ${processador}" th:value="${processador.id}" th:text="${processador.descricaoProcessador}"></option>
+		            	</select>
+		              </div>
+		              <div class="col-xs-2">
+		              	<label>Memória RAM</label>
+		              	<select class="form-control input-sm" th:field="*{memoriaRam}">
+		              		<option selected th:label="${host.memoriaRam.memRam}" th:value="${host.memoriaRam.id}"></option>
+			              	<option th:each="ram : ${ram}" th:value="${ram.id}" th:text="${ram.memRam}"></option>
+		            	</select>
+		              </div>
+		              <div class="col-xs-4">
+		              	<label>Armazenamento (HD)</label>
+		              	<select class="form-control input-sm" th:field="*{hd}">
+							<option selected th:label="${host.hd}" th:value="${host.hd}"></option>
+							<option th:each="hd : ${hds}" th:value="${hd.descricao}" th:text="${hd.descricao}"></option>
+						</select>
+		              </div>
+		            </div>
+		            <br>
+		        </form>
+              </div>
+            </div>
+            <div class="tab-pane" id="dadosAntigo">
+              <div class="box-body">
+				<div class="row">
+                  <div class="col-xs-2">
+                    <label>Hostname</label>
+                    <output th:text="${host.hostname}"></output>
+                  </div>
+                  <div class="col-xs-2">
+                    <label>Departamento</label>
+                    <output th:text="${host.departamento.nomeDepartamento}"></output>
+                  </div>
+                  <div class="col-xs-3">
+                    <label>Utilizador</label>
+                    <output th:text="${host.utilizador}"></output>
+                  </div>
+                </div>
+                <br>
+                <br>
+	            <div class="with-border">
+	              <h4><label>Configurações</label></h4>
+	            </div>
+                <div class="row">
+				  <div class="col-xs-2">
+                    <label>Tipo</label>
+                    <output th:text="${host.tipoHost.descricao}"></output>
+                  </div>
+                  <div class="col-xs-2">
+                    <label>Endereço MAC</label>
+                    <output th:text="${host.enderecoMac}"></output>
+                  </div>
+                  <div class="col-xs-3">
+                    <label>Sistema Operacional</label>
+                    <output th:text="${host.sistemaOperacional.sistemaOperacional}"></output>
+                  </div>
+                  <div class="col-xs-3">
+                    <label>Arquitetura</label>
+                    <output th:text="${host.arquiteturaSO.descricaoArquitetura}"></output>
+                  </div>
+                  <div class="col-xs-4">
+                    <label>Chave de Licença</label>
+                    <output th:text="${host.chaveLicenca}"></output>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-2">
+                    <label>Processador</label>
+                    <output th:text="${host.processador.descricaoProcessador}"></output>
+                  </div>
+                  <div class="col-xs-2">
+                    <label>Memória RAM</label>
+                    <output th:text="${host.memoriaRam.memRam}"></output>
+                  </div>
+                  <div class="col-xs-2">
+                    <label>HD</label>
+                    <output th:text="${host.hd}"></output>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+ 
+        </div>
+        
+      </div>
+
+    </section>
+    
+</section>
+
+	<th:block layout:fragment="javascript-extra">
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="https://rawgit.com/digitalBush/jquery.maskedinput/1.4.1/dist/jquery.maskedinput.min.js"></script>
+	
+	<script>
+		var macAddress = document.getElementById("macAddress");
+		
+		function formatMAC(e) {
+		    var r = /([a-f0-9]{2})([a-f0-9]{2})/i,
+		        str = e.target.value.replace(/[^a-f0-9]/ig, "");
+		
+		    while (r.test(str)) {
+		        str = str.replace(r, '$1' + ':' + '$2');
+		    }
+		
+		    e.target.value = str.slice(0, 17);
+		};
+		
+		macAddress.addEventListener("keyup", formatMAC, false)
+	</script>
+	</th:block>
+</body>
+</html>

@@ -7,6 +7,7 @@
               <div class="col-xs-2">
                 <label>Tipo</label>
                 <select class="form-control input-sm" th:field="*{tipoHost}">
+                	<option label="" value=""></option>
 	              	<option th:each="tphost : ${tphost}" th:value="${tphost.id}" th:text="${tphost.descricao}"></option>
 	            </select>
               </div>
@@ -39,12 +40,14 @@
               <div class="col-xs-3">
               	<label>Sistema Operacional</label>
               	<select class="form-control input-sm" th:field="*{sistemaOperacional}">
+              		<option label="" value=""></option>
 	              	<option th:each="sistemaOperacional : ${sistemaOperacional}" th:value="${sistemaOperacional.id}" th:text="${sistemaOperacional.sistemaOperacional}"></option>
             	</select>
               </div>
               <div class="col-xs-2">
               	<label>Arquitetura</label>
               	<select class="form-control input-sm" th:field="*{arquiteturaSO}">
+              		<option label="" value=""></option>
 	              	<option th:each="arqso : ${arqso}" th:value="${arqso.id}" th:text="${arqso.descricaoArquitetura}"></option>
             	</select>
               </div>
@@ -58,14 +61,23 @@
               <div class="col-xs-2">
               	<label>Processador</label>
               	<select class="form-control input-sm" th:field="*{processador}">
+              		<option label="" value=""></option>
 	              	<option th:each="processador : ${processador}" th:value="${processador.id}" th:text="${processador.descricaoProcessador}"></option>
             	</select>
               </div>
               <div class="col-xs-2">
               	<label>Memória RAM</label>
               	<select class="form-control input-sm" th:field="*{memoriaRam}">
+              		<option label="" value=""></option>
 	              	<option th:each="ram : ${ram}" th:value="${ram.id}" th:text="${ram.memRam}"></option>
             	</select>
+              </div>
+              <div class="col-xs-2">
+              	<label>Armazenamento (HD)</label>
+              	<select class="form-control input-sm" th:field="*{hd}">
+					<option label="" value=""></option>
+					<option th:each="hd : ${hds}" th:value="${hd.descricao}" th:text="${hd.descricao}"></option>
+				</select>
               </div>
             </div>
             <br>

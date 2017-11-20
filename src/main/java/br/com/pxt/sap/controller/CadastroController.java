@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.pxt.sap.domain.HardDisk;
 import br.com.pxt.sap.domain.Host;
 import br.com.pxt.sap.domain.Impressora;
 import br.com.pxt.sap.repository.ArquiteturaSORepository;
@@ -38,6 +39,7 @@ public class CadastroController {
 		mv.addObject("sistemaOperacional", sistemaOperacionalRepo.findAll());
 		mv.addObject("processador", processadorRepo.findAll());
 		mv.addObject("ram", memoriaRamRepo.findAll());
+		mv.addObject("hds", HardDisk.values());
 		
 		// Objetos para cadastro de impressora
 		mv.addObject("impressora", new Impressora());

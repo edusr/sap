@@ -14,4 +14,10 @@ public interface HostRepository extends JpaRepository<Host, Long>{
 	
 	@Query("select count(h) from Host h where h.statusHost = 'EM_MANUTENCAO'")
 	Long qtdeHostEmManutencao();
+	
+	@Query("update Host h set h.statusHost = 'ATIVO' where h.id = ?1")
+	void mudaStatusDoHostParaAtivo(Long id);
+	
+	@Query("update Host h set h.statusHost = 'EM_MANUTENCAO' where h.id = ?1")
+	void mudaStatusDoHostParaEmManutencao(Long id);
 }
