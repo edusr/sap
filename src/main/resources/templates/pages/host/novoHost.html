@@ -22,10 +22,9 @@
 	              	<option th:each="tphost : ${tphost}" th:value="${tphost}" th:text="${tphost.descricao}"></option>
 	            </select>
               </div>
-              <div class="col-xs-2 has-error">
+              <div class="col-xs-2">
                 <label>Hostname</label>
-                <input th:field="*{hostname}" style="text-transform:uppercase;" type="text" class="form-control input-sm" placeholder="INF-000 / INFNB-000">
-                <span class="help-block">Hostname em uso</span>
+                <input id="hostname" th:field="*{hostname}" style="text-transform:uppercase;" type="text" class="form-control input-sm" placeholder="INF-000 / INFNB-000">
               </div>
 	          <div class="col-xs-2">
             	<label>Departamento</label>
@@ -43,10 +42,9 @@
 	           <h3>Configurações</h3>
 	        </div>
             <div class="row">
-              <div class="col-xs-2 has-error">
+              <div class="col-xs-2">
                 <label>Endereço Mac</label>
                 <input class="form-control" style="text-transform:uppercase;" id="macAddress" type="text" maxlength="17" th:field="*{enderecoMac}">
-                <span class="help-block">Endereço mac em uso</span>
               </div>
               <div class="col-xs-3">
               	<label>Sistema Operacional</label>

@@ -1,0 +1,30 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+		<form th:action="@{/tonner/salvar}" th:object="${tonner}" method="POST" th:fragment="formTonner">
+          <div class="box-body">
+            <div class="row">
+              <div class="col-xs-2">
+                <label>Modelo</label>
+                <input th:field="*{modelo}" style="text-transform:uppercase;" type="text" class="form-control input-sm">
+              </div>
+              <div class="col-xs-2">
+                <label>Quantidade Total</label>
+                <input th:field="*{quantidadeTotal}" type="text" class="form-control input-sm">
+              </div>
+	          <div class="col-xs-2">
+                <label>Quantidade Cheio</label>
+                <input th:field="*{quantidadeCheio}" type="text" class="form-control input-sm" >
+              </div>
+              <br>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-xs-2">
+                <button class="btn btn-info" type="submit">Salvar</button>
+                <button class="btn btn-danger" type="reset">Limpar</button>
+              </div>
+            </div>
+          </div>
+        </form>
+</html>

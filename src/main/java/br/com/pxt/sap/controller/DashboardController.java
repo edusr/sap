@@ -1,11 +1,15 @@
 package br.com.pxt.sap.controller;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.pxt.sap.domain.Host;
 import br.com.pxt.sap.repository.HostRepository;
 
 @Controller
@@ -23,4 +27,8 @@ public class DashboardController {
 		return mv;
 	}
 	
+	@GetMapping(path = "/graficoDeptoHost")
+	public @ResponseBody Collection<Host> popularGraficoDeptoHost() {
+		return hostRepo.findAll();
+	}
 }

@@ -20,4 +20,5 @@ public interface HostRepository extends JpaRepository<Host, Long>{
 	
 	@Query("update Host h set h.statusHost = 'EM_MANUTENCAO' where h.id = ?1")
 	void mudaStatusDoHostParaEmManutencao(Long id);
+	
 }

@@ -22,7 +22,7 @@
           <span class="input-group-btn">
                 <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
                 </button>
-              </span>
+          </span>
         </div>
       </form>
       <!-- /.search form -->
@@ -38,7 +38,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="treeview">
+          <!-- MENU DE NOVAS SOLICITAÇÕES -->
+            <!-- <li class="treeview">
 			  <a href="#">
 		        <i class="fa fa-handshake-o"></i>
 		        <span>Solicitações</span>
@@ -47,29 +48,29 @@
 		        </span>
 		      </a>
               <ul class="treeview-menu">
-			    <li><a href="#"><i class="fa fa-print"></i> Solicitação de Tonner</a></li>
+			    <li><a href="#"><i class="fa fa-print"></i> Tonner</a></li>
                 <li><a href="#"><i class="fa fa-wrench"></i> Entrada de recursos SUF</a></li>
               </ul>
-            </li>
+            </li> -->
             
             <li>
 			  <a th:href="@{/novo}">
 		        <i class="fa fa-cart-plus"></i>
-		        <span>Equipamentos e Recursos</span>
+		        <span>Equipamento</span>
 		      </a>
             </li>
           </ul>
         </li>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-tasks"></i> <span>Gestão & Controle SUF</span>
+            <i class="fa fa-tasks"></i> <span>SUF</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu"> <!-- Lista para o submenu SUF -->
-            <li><a href="#"><i class="fa fa-cogs"></i> Manutenção de Equipamentos</a></li>
-            <li><a href="#"><i class="fa fa-print"></i> Tonners</a></li>
+            <li><a href="#"><i class="fa fa-cogs"></i> Manutenção de Equip.</a></li>
+            <li><a th:href="@{/tonner/consulta}"><i class="fa fa-print"></i> Tonners</a></li>
             <li><a href="#"><i class="fa fa-wrench"></i> Produtos</a></li>
             <li><a href="#"><i class="fa fa-group"></i> Suporte de Terceiros</a></li>
           </ul>
@@ -77,6 +78,10 @@
         <li>
           <a th:href="@{/host/consulta}">
             <i class="fa fa-desktop"></i> <span>Hosts</span>
+            <!-- <span class="pull-right-container">
+              <span class="label label-danger pull-right">5</span>
+              <span class="label label-success pull-right">4</span>
+            </span> -->
           </a>
         </li>
       </ul>

@@ -23,7 +23,7 @@ import br.com.pxt.sap.service.HostServiceImpl;
 @RequestMapping(value="/host")
 public class HostController {
 
-	@Autowired HostServiceImpl hostService;
+	@Autowired private HostServiceImpl hostService;
 	@Autowired private TipoHostRepository tipoHostRepo;
 	@Autowired private ArquiteturaSORepository arquiteturaSORepo;
 	@Autowired private DepartamentoRepository departamentoRepo;
@@ -35,18 +35,9 @@ public class HostController {
 	public ModelAndView construirTabela() {
 		ModelAndView mv = new ModelAndView("pages/host/listHost");
 		mv.addObject("hosts", hostService.findAll());
-		mv.addObject("hostSelecionado", hostService.findAll().get(0));
 		return mv;
 	}
 
-	@GetMapping(value="/consulta/{hostname}")
-	public ModelAndView listaComHostSelecionado(@PathVariable("hostname") String hostname) {
-		ModelAndView mv = new ModelAndView("pages/host/listHost");
-		mv.addObject("hostSelecionado", hostService.buscaPorHostname(hostname));
-		mv.addObject("hosts", hostService.findAll());
-		return mv;
-	}
-	
 	@PostMapping(value="/salvar")
 	public String prepararFormulario(@ModelAttribute("host") Host host) {
 		hostService.save(host);
@@ -54,7 +45,7 @@ public class HostController {
 	}
 	
 	@GetMapping(value="/editar/{hostname}")
-	public ModelAndView detalheDoHost(@PathVariable("hostname") String hostname) {
+	public ModelAndView editarHost(@PathVariable("hostname") String hostname) {
 		ModelAndView mv = new ModelAndView("pages/host/editarHost");
 		
 		mv.addObject("host", hostService.buscaPorHostname(hostname));
@@ -69,4 +60,8 @@ public class HostController {
 		return mv;
 	}
 	
+	@PostMapping(value="/editar/salvarEdicao")
+	public void salvarHostEditado(@ModelAttribute("host") Host host) {
+		
+	}
 }

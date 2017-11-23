@@ -4,7 +4,7 @@ public enum HardDisk {
 
 	_320GB(1, "320 GB"),
 	_500GB(2, "500 GB"),
-	_1000GB(3, "1000 GB");
+	_1000GB(3, "1 TB");
 	
 	public int valor;
 	public String descricao;

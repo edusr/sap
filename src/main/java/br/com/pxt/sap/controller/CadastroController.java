@@ -9,8 +9,10 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.pxt.sap.domain.HardDisk;
 import br.com.pxt.sap.domain.Host;
 import br.com.pxt.sap.domain.Impressora;
+import br.com.pxt.sap.domain.Tonner;
 import br.com.pxt.sap.repository.ArquiteturaSORepository;
 import br.com.pxt.sap.repository.DepartamentoRepository;
+import br.com.pxt.sap.repository.HostRepository;
 import br.com.pxt.sap.repository.MemoriaRamRepository;
 import br.com.pxt.sap.repository.ProcessadorRepository;
 import br.com.pxt.sap.repository.SistemaOperacionalRepository;
@@ -20,6 +22,7 @@ import br.com.pxt.sap.repository.TipoHostRepository;
 @RequestMapping(value="/novo")
 public class CadastroController {
 
+	@Autowired private HostRepository hostRepo;
 	@Autowired private TipoHostRepository tipoHostRepo;
 	@Autowired private ArquiteturaSORepository arquiteturaSORepo;
 	@Autowired private DepartamentoRepository departamentoRepo;
@@ -33,6 +36,7 @@ public class CadastroController {
 		
 		// Objetos para cadastro de Host
 		mv.addObject("host", new Host());
+		mv.addObject("hostsExistentes", hostRepo.findAll());
 		mv.addObject("tphost", tipoHostRepo.findAll());
 		mv.addObject("departamento", departamentoRepo.findAll());
 		mv.addObject("arqso", arquiteturaSORepo.findAll());
@@ -40,6 +44,9 @@ public class CadastroController {
 		mv.addObject("processador", processadorRepo.findAll());
 		mv.addObject("ram", memoriaRamRepo.findAll());
 		mv.addObject("hds", HardDisk.values());
+		
+		// Objetos para cadastro de Tonner
+		mv.addObject("tonner", new Tonner());
 		
 		// Objetos para cadastro de impressora
 		mv.addObject("impressora", new Impressora());

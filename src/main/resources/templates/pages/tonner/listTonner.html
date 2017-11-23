@@ -1,0 +1,74 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="'layout/default'">
+<head>
+<title>Sistema Apoio a Produção</title>
+</head>
+<body>
+    <section layout:fragment="conteudo">
+    
+	    <section class="content">
+	       <div class="row">
+		      <div class="col-md-12">
+		       <div class="box box-primary">
+		         <div style="text-align: center" class="box-header with-border">
+		         	<a  style="float:left" th:href="@{/novo}">
+		         	  <span  class="glyphicon glyphicon-plus"></span>
+		         	  <b>Adicionar</b>
+		         	</a>
+		            <h3 class="box-title">TONNER</h3>
+		         </div>
+	
+		         <div class="box-body">
+		           <table id="t_tonner" class="table table-bordered table-striped">
+		             <thead>
+		               <tr>
+		                 <th>Modelo</th>
+		                 <th>Cheio</th>
+		                 <th>Vazio</th>
+		                 <th>Total</th>
+		               </tr>
+		             </thead>
+		             <tbody>
+		                <tr th:each="tonner : ${tonners}">
+		             	  <td th:text="${tonner.modelo}"></td>
+		             	  <td th:text="${tonner.quantidadeCheio}"></td>
+		             	  <td th:text="${tonner.quantidadeTotal - tonner.quantidadeCheio}"></td>
+		             	  <td th:text="${tonner.quantidadeTotal}"></td>
+		             	</tr>
+		             </tbody>
+		           </table>
+		         </div>
+		        </div>
+		      </div>
+	       </div>
+	    </section>
+
+    </section>
+  
+<th:block layout:fragment="javascript-extra">
+	<script>
+	  $(function () {
+	    $('#t_tonner').dataTable({
+	  	  "language": { //altera informações da tabela para português
+	  	    "search": "Buscar:",
+	  	    "zeroRecords": "Nenhum registro encontrado",
+	  	    "infoEmpty": "",
+	  	    "infoFiltered":   ""
+	  	  },
+	  	  "columns": [ //altera as colunas que são pesquisáveis
+	  		{"searchable": true},
+	  		{"searchable": false},
+	  		{"searchable": false},
+	  		{"searchable": false}
+	  	  ],
+	  	  "bLengthChange" : false, //esconde opção de lengthMenu
+	  	  "bInfo":false,
+	  	  "bPaginate": false
+	  	})
+	  });
+	</script>
+</th:block>
+</body>
+</html>

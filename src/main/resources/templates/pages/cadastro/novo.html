@@ -17,12 +17,17 @@
 			  <option value="">Escolha uma opção...</option>
 			  <option value="host">Host</option>
 			  <option value="impressora">Impressora</option>
+			  <option value="tonner">Tonner</option>
 			</select>
           
           </div>
           
 		  <div id="host" class="formulario" style="display:none;">
 			<div th:replace="/formularios/formHost :: formHost"></div>
+		  </div>
+		  
+		  <div id="tonner" class="formulario" style="display:none;">
+			<div th:replace="/formularios/formTonner :: formTonner"></div>
 		  </div>
 		  
 <!-- 		  <div id="impressora" class="formulario" style="display:none;">

@@ -21,7 +21,7 @@
 		         </div>
 	
 		         <div class="box-body">
-		           <table id="t_host" class="table table-bordered table-striped nowrap" style="font-size:small">
+		           <table id="t_host" class="table table-bordered table-striped nowrap">
 		             <thead>
 		               <tr>
 		                 <th>Hostname</th>
@@ -50,10 +50,8 @@
 		             	  <td th:text="${host.enderecoMac}"></td>
 		             	  <td th:text="${host.chaveLicenca}"></td>
 		             	  <td>
-		             	    <!-- <span th:if="${host.statusHost.valor == 1}"><i class="fa fa-circle" style="color:green"></i></span>
-		             	    <span th:if="${host.statusHost.valor == 2}"><i class="fa fa-circle text-primary" style="color:red"></i></span> -->
 		             	  	<span th:if="${host.statusHost.valor == 1}" class="label label-success" th:text="${host.statusHost.descricao}"></span>
-		             	  	<span th:if="${host.statusHost.valor == 2}" class="label label-danger" th:text="${host.statusHost.descricao}"></span>
+		             	  	<span th:if="${host.statusHost.valor == 2}" class="label label-primary" th:text="${host.statusHost.descricao}"></span>
 		             	  </td>
 		             	</tr>
 		             </tbody>
@@ -111,7 +109,7 @@
 	  		{"searchable": true},
 	  		{"searchable": false}
 	  	  ],
-	  	  "lengthMenu": [ [10, 20, 30, -1], [10, 20, 30, "Todos"] ] // defina quantidade de linhas para exibir
+	  	  "lengthMenu": [ [-1, 10, 20, 30], ["Todos", 10, 20, 30] ] // defina quantidade de linhas para exibir
 	  	})
 	  });
 	</script>

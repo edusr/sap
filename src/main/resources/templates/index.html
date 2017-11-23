@@ -14,13 +14,13 @@
       </h1>
     </section>
 
-    <!-- Main content -->
+    
     <section class="content">
-      <!-- Small boxes (Stat box) -->
+      
       <div class="row">
         <div class="col-lg-4 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-blue">
+          <div class="small-box bg-red">
             <div class="inner">
               <h3><span th:text="${qtdHostEmManutencao}"></span></h3>
               <p>Equipamentos em Manutenção</p>
@@ -31,7 +31,21 @@
             <a href="#" class="small-box-footer">Ver todos <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        <!-- ./col -->
+        
+        <div class="col-lg-4 col-xs-6">
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3><span th:text="${qtdHostAtivo}"></span> <sup style="font-size: 20px">/</sup> <span th:text="${qtdTotalHosts}"></span></h3>
+
+              <p>Hosts ativos em operação</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-android-desktop"></i>
+            </div>
+            <a th:href="@{/host/consulta}" class="small-box-footer">Ver todos <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        
         <div class="col-lg-4 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-yellow">
@@ -45,50 +59,95 @@
             <a href="#" class="small-box-footer">Ver todos <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        <!-- ./col -->
-        <div class="col-lg-4 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3><span th:text="${qtdHostAtivo}"></span> <sup style="font-size: 20px">/</sup> <span th:text="${qtdTotalHosts}"></span></h3>
-
-              <p>Hosts ativos em operação</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-android-desktop"></i>
-            </div>
-            <a th:href="@{/hosts/consulta}" class="small-box-footer">Ver todos <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
 
       </div>
       
-      <div class="row">
+      <!-- GRÁFICOS -->
+<!--       <div class="row">
         
-        <section class="col-lg-7 connectedSortable">
+        <section class="col-lg-6 connectedSortable">
+          <div class="box box-danger">
+            <div class="box-header with-border" style="text-align:center">
+              <h3 class="box-title">Departamento / Host</h3>
+            </div>
+            <div class="row">
+	            <div class="col-md-8">
+	              <div class="box-body chart-responsive">
+	                <div class="chart" id="sales-chart" style="height: 300px; position: relative;"></div>
+	              </div>
+	            </div>
+	            <div class="col-md-4">
+	               <ul class="chart-legend clearfix">
+	                 <li><i class="fa fa-circle-o text-green"></i> Ativo</li>
+	                 <li><i class="fa fa-circle-o text-red"></i> Em Manutenção</li>
+	                 <li><i class="fa fa-circle-o text-yellow"></i> Alerta</li>
+	               </ul>
+	            </div>
+            </div>
+          </div>
           
         </section>
         
-        <section class="col-lg-5 connectedSortable">
-		  
+        <section class="col-lg-6 connectedSortable">
+		  <div class="box box-danger">
+            <div class="box-header with-border" style="text-align:center">
+              <h3 class="box-title">Impressora</h3>
+            </div>
+            <div class="row">
+	            <div class="col-md-8">
+	              <div class="box-body chart-responsive">
+	                <div class="chart" id="sales-chart" style="height: 300px; position: relative;"></div>
+	              </div>
+	            </div>'
+	            <div class="col-md-4">
+	               <ul class="chart-legend clearfix">
+	                 <li><i class="fa fa-circle-o text-aqua"></i> Safari</li>
+	                 <li><i class="fa fa-circle-o text-light-blue"></i> Opera</li>
+	                 <li><i class="fa fa-circle-o text-gray"></i> Navigator</li>
+	               </ul>
+	            </div>
+            </div>
+          </div>
         </section>
         
-      </div>
+      </div> -->
       
-
     </section>
 
-</section>
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <!-- jQuery 3 -->
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button);
-</script>
 <!-- Bootstrap 3.3.7 -->
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Morris.js charts -->
