@@ -16,6 +16,12 @@
                 <label>Quantidade Cheio</label>
                 <input th:field="*{quantidadeCheio}" type="text" class="form-control input-sm" >
               </div>
+              <div class="col-xs-2">
+            	<label>Modelo Impressora</label>
+            	<select class="form-control input-sm" th:field="*{modeloImpressora}">
+	              	<option th:each="modeloImp : ${modelosImp}" th:value="${modeloImp.id}" th:text="${modeloImp.modelo}"></option>
+            	</select>
+          	  </div>
               <br>
             </div>
             <br>

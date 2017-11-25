@@ -1,0 +1,36 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+		<form th:action="@{/impressora/modelo/salvar}" th:object="${modimp}" method="POST" th:fragment="formModeloImpressora">
+          <div class="box-body">
+            <div class="row">
+			  <div class="col-xs-2">
+                <label>Marca Impressora</label>
+                <select class="form-control input-sm" th:field="*{marcaImpressora}">
+                	<option label="" value=""></option>
+	              	<option th:each="marcaImp : ${marcasImp}" th:value="${marcaImp.id}" th:text="${marcaImp.marca}"></option>
+	            </select>
+              </div>
+              <div class="col-xs-2">
+                <label>Modelo</label>
+                <input th:field="*{modelo}" type="text" class="form-control input-sm">
+              </div>
+              <div class="col-xs-2">
+                <label>Modelo Tonner</label>
+                <select class="form-control input-sm" th:field="*{tonner}">
+                	<option label="" value=""></option>
+	              	<option th:each="tonner : ${tonners}" th:value="${tonner.id}" th:text="${tonner.modelo}"></option>
+	            </select>
+              </div>
+              <br>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-xs-2">
+                <button class="btn btn-info" type="submit">Salvar</button>
+                <button class="btn btn-danger" type="reset">Limpar</button>
+              </div>
+            </div>
+          </div>
+        </form>
+</html>

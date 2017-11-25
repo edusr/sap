@@ -10,9 +10,12 @@
 	                <input type="text" class="form-control input-sm input-sm" th:field="*{nome}"></input>
 	                <span class="help-block">Impressora já existe</span>
 	              </div>
-	              <div class="col-xs-2">
+				  <div class="col-xs-2">
 	                <label>Modelo</label>
-	                <input class="form-control input-sm" type="text" th:field="*{modelo}"></input>
+	                <select class="form-control input-sm" th:field="*{modeloImpressora}">
+	                	<option label="" value=""></option>
+		              	<option th:each="modeloImp : ${modelosImp}" th:value="${modeloImp.id}" th:text="${modeloImp.modelo}"></option>
+		            </select>
 	              </div>
 		          <div class="col-xs-2 has-error">
 	                <label>IP</label>
@@ -23,22 +26,10 @@
 	            <div class="row">
 	              <div class="col-xs-2">
 	            	<label>Departamento</label>
-	            	<select multiple="multiple" class="form-control input-sm" th:field="*{departamento.nomeDepartamento}">
-		              	<option th:each="departamento : ${departamento}" th:value="${departamento}" th:text="${departamento.nomeDepartamento}"></option>
+	            	<select multiple="multiple" class="form-control input-sm" th:field="*{departamento}">
+		              	<option th:each="departamento : ${departamento}" th:value="${departamento.id}" th:text="${departamento.nomeDepartamento}"></option>
 	            	</select>
 	          	  </div>
-	              <div class="col-xs-2">
-	                <label>Modelo de Tonner</label>
-	                <select class="form-control input-sm">
-	            	    <option hidden="true"></option>
-		              	<option>264X</option>
-		              	<option>16548E</option>
-		              	<option>64A</option>
-		              	<option>755S</option>
-		              	<option>1547W</option>
-		              	<option>352W</option>
-	            	</select>
-	              </div>
 	            </div>
 	            <br></br>
 	            <div class="row">

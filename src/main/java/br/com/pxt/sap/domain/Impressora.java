@@ -4,9 +4,12 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -23,11 +26,12 @@ public class Impressora implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
-	private String modelo;
 	private String ip;
+	@ManyToOne
+	@JoinColumn(name = "id_modeloImp", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_impressoraModelo"))
+	private ModeloImpressora modeloImpressora;
 	@OneToMany(targetEntity=Departamento.class)
 	private List<Departamento> departamento;
-	private Tonner Tonner;
 
 	public Long getId() {
 		return id;
@@ -45,20 +49,20 @@ public class Impressora implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getModelo() {
-		return modelo;
-	}
-
-	public void setModelo(String modelo) {
-		this.modelo = modelo;
-	}
-
 	public String getIp() {
 		return ip;
 	}
 
 	public void setIp(String ip) {
 		this.ip = ip;
+	}
+	
+	public ModeloImpressora getModeloImpressora() {
+		return modeloImpressora;
+	}
+
+	public void setModeloImpressora(ModeloImpressora modeloImpressora) {
+		this.modeloImpressora = modeloImpressora;
 	}
 
 	public List<Departamento> getDepartamento() {
@@ -67,14 +71,6 @@ public class Impressora implements Serializable {
 
 	public void setDepartamento(List<Departamento> departamento) {
 		this.departamento = departamento;
-	}
-
-	public Tonner getTonner() {
-		return Tonner;
-	}
-
-	public void setTonner(Tonner tonner) {
-		Tonner = tonner;
 	}
 
 }

@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -26,6 +27,8 @@ public class Tonner implements Serializable {
 	private Integer quantidadeTotal;
 	@Column(name="qtdeCheio")
 	private Integer quantidadeCheio;
+	@OneToOne(targetEntity = ModeloImpressora.class)
+	private ModeloImpressora modeloImpressora;
 
 	public Long getId() {
 		return id;
@@ -35,12 +38,12 @@ public class Tonner implements Serializable {
 		this.id = id;
 	}
 
-	public String getModelo() {
-		return modelo;
+	public ModeloImpressora getModeloImpressora() {
+		return modeloImpressora;
 	}
 
-	public void setModelo(String modelo) {
-		this.modelo = modelo;
+	public void setModeloImpressora(ModeloImpressora modeloImpressora) {
+		this.modeloImpressora = modeloImpressora;
 	}
 
 	public Integer getQuantidadeTotal() {
@@ -57,5 +60,13 @@ public class Tonner implements Serializable {
 
 	public void setQuantidadeCheio(Integer quantidadeCheio) {
 		this.quantidadeCheio = quantidadeCheio;
+	}
+
+	public String getModelo() {
+		return modelo;
+	}
+
+	public void setModelo(String modelo) {
+		this.modelo = modelo;
 	}
 }

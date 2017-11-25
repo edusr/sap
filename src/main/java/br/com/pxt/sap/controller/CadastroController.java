@@ -9,14 +9,18 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.pxt.sap.domain.HardDisk;
 import br.com.pxt.sap.domain.Host;
 import br.com.pxt.sap.domain.Impressora;
+import br.com.pxt.sap.domain.ModeloImpressora;
 import br.com.pxt.sap.domain.Tonner;
 import br.com.pxt.sap.repository.ArquiteturaSORepository;
 import br.com.pxt.sap.repository.DepartamentoRepository;
 import br.com.pxt.sap.repository.HostRepository;
+import br.com.pxt.sap.repository.MarcaImpressoraRepository;
 import br.com.pxt.sap.repository.MemoriaRamRepository;
+import br.com.pxt.sap.repository.ModeloImpressoraRepository;
 import br.com.pxt.sap.repository.ProcessadorRepository;
 import br.com.pxt.sap.repository.SistemaOperacionalRepository;
 import br.com.pxt.sap.repository.TipoHostRepository;
+import br.com.pxt.sap.repository.TonnerRepository;
 
 @Controller
 @RequestMapping(value="/novo")
@@ -29,6 +33,9 @@ public class CadastroController {
 	@Autowired private SistemaOperacionalRepository sistemaOperacionalRepo;
 	@Autowired private MemoriaRamRepository memoriaRamRepo;
 	@Autowired private ProcessadorRepository processadorRepo;
+	@Autowired private MarcaImpressoraRepository marcaImpressoraRepo;
+	@Autowired private ModeloImpressoraRepository modeloImpRepo;
+	@Autowired private TonnerRepository tonnerRepo;
 	
 	@GetMapping
 	public ModelAndView carregarObjetos() {
@@ -51,7 +58,12 @@ public class CadastroController {
 		// Objetos para cadastro de impressora
 		mv.addObject("impressora", new Impressora());
 		mv.addObject("departamento", departamentoRepo.findAll());
+		mv.addObject("modelosImp", modeloImpRepo.findAll());
+		mv.addObject("tonners", tonnerRepo.findAll());
 		
+		// Objeto para cadastro de modelo de impressora
+		mv.addObject("modimp", new ModeloImpressora());
+		mv.addObject("marcasImp", marcaImpressoraRepo.findAll());
 		
 		return mv;
 	}
