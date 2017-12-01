@@ -15,13 +15,6 @@
                 <label>Modelo</label>
                 <input th:field="*{modelo}" type="text" class="form-control input-sm">
               </div>
-              <div class="col-xs-2">
-                <label>Modelo Tonner</label>
-                <select class="form-control input-sm" th:field="*{tonner}">
-                	<option label="" value=""></option>
-	              	<option th:each="tonner : ${tonners}" th:value="${tonner.id}" th:text="${tonner.modelo}"></option>
-	            </select>
-              </div>
               <br>
             </div>
             <br>

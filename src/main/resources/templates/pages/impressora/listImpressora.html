@@ -1,0 +1,93 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="'layout/default'">
+<head>
+<title>Sistema Apoio a Produção</title>
+</head>
+<body>
+    <section layout:fragment="conteudo">
+    
+	    <section class="content">
+	       <div class="row">
+		      <div class="col-md-12">
+		       <div class="box box-primary">
+		         <div style="text-align: center" class="box-header with-border">
+		         	<a  style="float:left" th:href="@{/novo}">
+		         	  <span  class="glyphicon glyphicon-plus"></span>
+		         	  <b>Adicionar</b>
+		         	</a>
+		            <h3 class="box-title">Impressoras</h3>
+		         </div>
+	
+		         <div class="box-body">
+		           <table id="t_host" class="table table-bordered table-striped nowrap" style="font-size:small">
+		             <thead>
+		               <tr>
+		                 <th>Nome</th>
+		                 <th>IP</th>
+		                 <th>Departamento</th>
+		                 <th>Marca</th>
+		                 <th>Modelo</th>
+		                 <th>Tonner</th>
+		               </tr>
+		             </thead>
+		             <tbody>
+		                <tr th:each="impressora : ${impressoras}">
+		             	  <td th:text="${impressora.nome}"></td>
+		             	  <td th:text="${impressora.ip}"></td>
+		             	  <td th:each="departamento : ${impressora.departamento}">
+		             	     <th:block th:text="${departamento.nomeDepartamento}"></th:block>
+		             	  </td>
+		             	  <td th:text="${impressora.modeloImpressora.marcaImpressora.marca}"></td>
+		             	  <td th:text="${impressora.modeloImpressora.modelo}"></td>
+		             	  <td th:text="${impressora.}"></td>
+		             	</tr>
+		             </tbody>
+		             <tfoot>
+		             <tr>
+		               <th>Nome</th>
+		               <th>IP</th>
+		               <th>Departamento</th>
+		               <th>Marca</th>
+		               <th>Modelo</th>
+		               <th>Tonner</th>
+		             </tr>
+		             </tfoot>
+		           </table>
+		         </div>
+		        </div>
+		      </div>
+	       </div>
+	    </section>
+
+    </section>
+  
+<th:block layout:fragment="javascript-extra">
+	<script>
+	  $(function () {
+	    $('#t_host').dataTable({
+	      "scrollX": true,
+	  	  "language": { //altera informações da tabela para português
+		  	"search": "Buscar:",
+		  	"zeroRecords": "Nenhum registro encontrado",
+		  	"infoEmpty": "",
+		  	"infoFiltered":   ""
+	  	  },
+	  	  "columns": [ //altera as colunas que são pesquisáveis
+	  		{"searchable": true},
+	  		{"searchable": true},
+	  		{"searchable": true},
+	  		{"searchable": true},
+	  		{"searchable": true},
+	  		{"searchable": true}
+	  	  ],
+	  	  "bLengthChange" : false, //esconde opção de lengthMenu
+	  	  "bInfo":false,
+	  	  "bPaginate": false
+	  	})
+	  });
+	</script>
+</th:block>
+</body>
+</html>

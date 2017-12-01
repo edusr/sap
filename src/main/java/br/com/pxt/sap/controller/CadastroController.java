@@ -21,6 +21,7 @@ import br.com.pxt.sap.repository.ProcessadorRepository;
 import br.com.pxt.sap.repository.SistemaOperacionalRepository;
 import br.com.pxt.sap.repository.TipoHostRepository;
 import br.com.pxt.sap.repository.TonnerRepository;
+import br.com.pxt.sap.security.Seguranca;
 
 @Controller
 @RequestMapping(value="/novo")
@@ -36,6 +37,7 @@ public class CadastroController {
 	@Autowired private MarcaImpressoraRepository marcaImpressoraRepo;
 	@Autowired private ModeloImpressoraRepository modeloImpRepo;
 	@Autowired private TonnerRepository tonnerRepo;
+	@Autowired private Seguranca seguranca;
 	
 	@GetMapping
 	public ModelAndView carregarObjetos() {
@@ -64,6 +66,9 @@ public class CadastroController {
 		// Objeto para cadastro de modelo de impressora
 		mv.addObject("modimp", new ModeloImpressora());
 		mv.addObject("marcasImp", marcaImpressoraRepo.findAll());
+		
+		// adiciona usuarioLogado
+		mv.addObject("usuarioLogado", seguranca.getUsuarioLogado());
 		
 		return mv;
 	}

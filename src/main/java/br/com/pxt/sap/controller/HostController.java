@@ -17,6 +17,7 @@ import br.com.pxt.sap.repository.MemoriaRamRepository;
 import br.com.pxt.sap.repository.ProcessadorRepository;
 import br.com.pxt.sap.repository.SistemaOperacionalRepository;
 import br.com.pxt.sap.repository.TipoHostRepository;
+import br.com.pxt.sap.security.Seguranca;
 import br.com.pxt.sap.service.HostServiceImpl;
 
 @Controller
@@ -30,11 +31,16 @@ public class HostController {
 	@Autowired private SistemaOperacionalRepository sistemaOperacionalRepo;
 	@Autowired private MemoriaRamRepository memoriaRamRepo;
 	@Autowired private ProcessadorRepository processadorRepo;
-
+	@Autowired private Seguranca seguranca;
+	
 	@GetMapping(value="/consulta")
 	public ModelAndView construirTabela() {
 		ModelAndView mv = new ModelAndView("pages/host/listHost");
 		mv.addObject("hosts", hostService.findAll());
+		
+		// adiciona usuarioLogado
+		mv.addObject("usuarioLogado", seguranca.getUsuarioLogado());
+		
 		return mv;
 	}
 
@@ -57,6 +63,9 @@ public class HostController {
 		mv.addObject("ram", memoriaRamRepo.findAll());
 		mv.addObject("hds", HardDisk.values());
 		
+		// adiciona usuarioLogado
+		mv.addObject("usuarioLogado", seguranca.getUsuarioLogado());
+		
 		return mv;
 	}
 	
@@ -64,4 +73,5 @@ public class HostController {
 	public void salvarHostEditado(@ModelAttribute("host") Host host) {
 		
 	}
+
 }

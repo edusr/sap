@@ -29,7 +29,7 @@ public class Departamento implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "id_imp", referencedColumnName = "id", nullable = true, foreignKey = @ForeignKey(name = "fk_departamentoImpressora"))
 	private Impressora impressora;
-	@OneToMany(targetEntity=Host.class, mappedBy="departamento")
+	@OneToMany(targetEntity=Host.class, mappedBy= "departamento")
 	private List<Host> host;
 
 	public Long getId() {

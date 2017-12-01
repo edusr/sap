@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.pxt.sap.domain.Tonner;
 import br.com.pxt.sap.repository.TonnerRepository;
+import br.com.pxt.sap.security.Seguranca;
 import br.com.pxt.sap.service.TonnerServiceImpl;
 
 @Controller
@@ -18,11 +19,16 @@ public class TonnerController {
 
 	@Autowired private TonnerRepository tonnerRepo;
 	@Autowired private TonnerServiceImpl tonnerService;
+	@Autowired private Seguranca seguranca;
 	
 	@GetMapping(value="/consulta")
 	public ModelAndView construirTabela() {
 		ModelAndView mv = new ModelAndView("pages/tonner/listTonner");
 		mv.addObject("tonners", tonnerRepo.findAll());
+		
+		// adiciona usuarioLogado
+		mv.addObject("usuarioLogado", seguranca.getUsuarioLogado());
+		
 		return mv;
 	}
 	

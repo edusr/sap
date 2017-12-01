@@ -31,9 +31,8 @@
 
 					<div class="form-group">
 						<div class="col-sm-9">
-							<input type="text" th:field="*{identificacaoLogin}" placeholder="Login"
-								class="form-control" /> <label
-								th:if="${#fields.hasErrors('identificacaoLogin')}" th:errors="*{identificacaoLogin}"
+							<input type="text" th:field="*{identificacaoLogin}" placeholder="Login" class="form-control" /> 
+							<label th:if="${#fields.hasErrors('identificacaoLogin')}" th:errors="*{identificacaoLogin}"
 								class="validation-message"></label>
 						</div>
 					</div>

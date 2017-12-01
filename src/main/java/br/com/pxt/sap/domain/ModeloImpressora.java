@@ -29,8 +29,6 @@ public class ModeloImpressora implements Serializable {
 	private String modelo;
 	@OneToMany(targetEntity = Impressora.class)
 	private List<Impressora> impressora;
-	@OneToOne(targetEntity = Tonner.class)
-	private Tonner tonner;
 
 	public Long getId() {
 		return id;
@@ -62,14 +60,6 @@ public class ModeloImpressora implements Serializable {
 
 	public void setImpressora(List<Impressora> impressora) {
 		this.impressora = impressora;
-	}
-
-	public Tonner getTonner() {
-		return tonner;
-	}
-
-	public void setTonner(Tonner tonner) {
-		this.tonner = tonner;
 	}
 
 }

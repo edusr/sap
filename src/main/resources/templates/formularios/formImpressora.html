@@ -5,10 +5,9 @@
 			<form th:action="@{/impressora/salvar}" method="POST" th:object="${impressora}" th:fragment="formImpressora">
 	          <div class="box-body">
 	            <div class="row">
-	              <div class="col-xs-2 has-error">
+	              <div class="col-xs-2">
 	                <label>Nome</label>
 	                <input type="text" class="form-control input-sm input-sm" th:field="*{nome}"></input>
-	                <span class="help-block">Impressora já existe</span>
 	              </div>
 				  <div class="col-xs-2">
 	                <label>Modelo</label>
@@ -17,10 +16,9 @@
 		              	<option th:each="modeloImp : ${modelosImp}" th:value="${modeloImp.id}" th:text="${modeloImp.modelo}"></option>
 		            </select>
 	              </div>
-		          <div class="col-xs-2 has-error">
+		          <div class="col-xs-2">
 	                <label>IP</label>
 					<input type="text" class="form-control input-sm" th:field="*{ip}"></input>
-					<span class="help-block">IP já está em uso</span>
 	              </div>
 	            </div>
 	            <div class="row">
