@@ -10,13 +10,9 @@
     
 	    <section class="content">
 	       <div class="row">
-		      <div class="col-md-12">
+		      <div class="col-md-9">
 		       <div class="box box-primary">
 		         <div style="text-align: center" class="box-header with-border">
-		         	<a  style="float:left" th:href="@{/novo}">
-		         	  <span  class="glyphicon glyphicon-plus"></span>
-		         	  <b>Adicionar</b>
-		         	</a>
 		            <h3 class="box-title">Impressoras</h3>
 		         </div>
 	
@@ -26,38 +22,73 @@
 		               <tr>
 		                 <th>Nome</th>
 		                 <th>IP</th>
-		                 <th>Departamento</th>
 		                 <th>Marca</th>
 		                 <th>Modelo</th>
-		                 <th>Tonner</th>
+		                 <th></th>
 		               </tr>
 		             </thead>
 		             <tbody>
 		                <tr th:each="impressora : ${impressoras}">
 		             	  <td th:text="${impressora.nome}"></td>
 		             	  <td th:text="${impressora.ip}"></td>
-		             	  <td th:each="departamento : ${impressora.departamento}">
-		             	     <th:block th:text="${departamento.nomeDepartamento}"></th:block>
-		             	  </td>
 		             	  <td th:text="${impressora.modeloImpressora.marcaImpressora.marca}"></td>
 		             	  <td th:text="${impressora.modeloImpressora.modelo}"></td>
-		             	  <td th:text="${impressora.}"></td>
+		             	  <td>
+		             	    <button th:href="@{/impressora/consulta/} + ${impressora.id}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-search"></span></button>
+		             	  </td>
+<!-- 		             	  <td>
+		             	    <a th:href="@{/impressora/consulta/{id} (id=${impressora.id})">
+		             	    </a>
+		             	  </td> -->
 		             	</tr>
 		             </tbody>
 		             <tfoot>
 		             <tr>
 		               <th>Nome</th>
 		               <th>IP</th>
-		               <th>Departamento</th>
 		               <th>Marca</th>
 		               <th>Modelo</th>
-		               <th>Tonner</th>
+		               <th></th>
 		             </tr>
 		             </tfoot>
 		           </table>
 		         </div>
 		        </div>
 		      </div>
+		      
+	        <div class="col-md-3">
+	   
+	          <div class="box box-primary">
+	            <div class="box-body box-profile">
+	              <h1 class="text-center" th:text="${impressoraSelecionada.nome}"></h1>
+	
+	              <ul class="list-group list-group-unbordered">
+					<li class="list-group-item">
+	                  <b>IP</b> <a class="pull-right" th:text="${impressoraSelecionada.ip}"></a>
+	                </li>
+	                <li class="list-group-item">
+	                  <b>Departamento</b>
+	                  <a th:each="departamento : ${impressoraSelecionada.departamento}" class="pull-right">
+	                  	<th:block th:text="${departamento.nomeDepartamento}"></th:block>
+	                  </a>
+	                </li>
+	                <li class="list-group-item">
+	                  <b>Marca</b> <a class="pull-right" th:text="${impressoraSelecionada.modeloImpressora.marcaImpressora.marca}"></a>
+	                </li>
+	                <li class="list-group-item">
+	                  <b>Modelo</b> <a class="pull-right" th:text="${impressoraSelecionada.modeloImpressora.modelo}"></a>
+	                </li>
+	                <li class="list-group-item">
+	                  <b>Tonner</b> <a class="pull-right" th:text="${impressoraSelecionada.modeloImpressora.modelo}"></a>
+	                </li>
+	              </ul>
+	
+	            </div>
+	     
+	          </div>
+	      
+	
+	        </div>
 	       </div>
 	    </section>
 

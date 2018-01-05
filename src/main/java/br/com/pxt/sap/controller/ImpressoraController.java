@@ -1,9 +1,12 @@
 package br.com.pxt.sap.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,11 +31,30 @@ public class ImpressoraController {
 	public ModelAndView construirTabela() {
 		ModelAndView mv = new ModelAndView("pages/impressora/listImpressora");
 		
+		List<Impressora> impressoras = impRepo.findAll();
+		
 		mv.addObject("usuarioLogado", seguranca.getUsuarioLogado());
 		
-		mv.addObject("impressoras", impRepo.findAll());
+		mv.addObject("impressoras", impressoras);
 		mv.addObject("modelImp", modeloImpRepo.findAll());
 		mv.addObject("tonner", tonnerRepo.findAll());
+		mv.addObject("impressoraSelecionada", impressoras.get(0));
+		
+		return mv;
+	}
+	
+	@GetMapping(value = "/consulta/{id}")
+	public ModelAndView consultaComImpressoraSelecionada(@PathVariable("id") Impressora imp) {
+		ModelAndView mv = new ModelAndView("pages/impressora/listImpressora");
+		
+		List<Impressora> impressoras = impRepo.findAll();
+		
+		mv.addObject("usuarioLogado", seguranca.getUsuarioLogado());
+		
+		mv.addObject("impressoras", impressoras);
+		mv.addObject("modelImp", modeloImpRepo.findAll());
+		mv.addObject("tonner", tonnerRepo.findAll());
+		mv.addObject("impressoraSelecionada", imp);
 		
 		return mv;
 	}

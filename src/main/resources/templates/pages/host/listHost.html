@@ -13,10 +13,6 @@
 		      <div class="col-md-12">
 		       <div class="box box-primary">
 		         <div style="text-align: center" class="box-header with-border">
-		         	<a  style="float:left" th:href="@{/novo}">
-		         	  <span  class="glyphicon glyphicon-plus"></span>
-		         	  <b>Adicionar</b>
-		         	</a>
 		            <h3 class="box-title">HOSTS</h3>
 		         </div>
 	
@@ -27,12 +23,12 @@
 		                 <th>Hostname</th>
 		                 <th>Departamento</th>
 		                 <th>Utilizador</th>
-		                 <th>S.O.</th>
-		                 <th>Arquitetura</th>
 		                 <th>Processador</th>
 		                 <th>RAM</th>
 		                 <th>HD</th>
 		                 <th>Endereço MAC</th>
+		                 <th>S.O.</th>
+		                 <th>Arquitetura</th>
 		                 <th>Chave SO</th>
 		                 <th>Status</th>
 		               </tr>
@@ -42,12 +38,12 @@
 		             	  <td><a th:href="@{/host/editar/} + ${host.hostname}" th:text="${host.hostname}"></a></td>
 		             	  <td th:text="${host.departamento.nomeDepartamento}"></td>
 		             	  <td th:text="${host.utilizador}"></td>
-		             	  <td th:text="${host.sistemaOperacional.sistemaOperacional}"></td>
-		             	  <td th:text="${host.arquiteturaSO.descricaoArquitetura}"></td>
 		             	  <td th:text="${host.processador.descricaoProcessador}"></td>
 		             	  <td th:text="${host.memoriaRam.memRam}"></td>
 		             	  <td th:text="${host.hd}"></td>
 		             	  <td th:text="${host.enderecoMac}"></td>
+		             	  <td th:text="${host.sistemaOperacional.sistemaOperacional}"></td>
+		             	  <td th:text="${host.arquiteturaSO.descricaoArquitetura}"></td>
 		             	  <td th:text="${host.chaveLicenca}"></td>
 		             	  <td>
 		             	    <!-- <span th:if="${host.statusHost.valor == 1}"><i class="fa fa-circle" style="color:green"></i></span>
@@ -62,12 +58,12 @@
 		               <th>Hostname</th>
 		               <th>Departamento</th>
 		               <th>Utilizador</th>
-		               <th>S.O.</th>
-		               <th>Arquitetura</th>
 		               <th>Processador</th>
 		               <th>RAM</th>
 		               <th>HD</th>
 		               <th>Endereço MAC</th>
+		               <th>S.O.</th>
+		               <th>Arquitetura</th>
 		               <th>Chave SO</th>
 		               <th>Status</th>
 		             </tr>

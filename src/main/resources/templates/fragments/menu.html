@@ -69,15 +69,24 @@
             </span>
           </a>
           <ul class="treeview-menu"> <!-- Lista para o submenu SUF -->
-            <li><a href="#"><i class="fa fa-cogs"></i> Manutenção de Equip.</a></li>
+            <!-- <li><a href="#"><i class="fa fa-cogs"></i> Manutenção de Equip.</a></li> -->
             <li><a th:href="@{/tonner/consulta}"><i class="fa fa-print"></i> Tonners</a></li>
-            <li><a href="#"><i class="fa fa-wrench"></i> Produtos</a></li>
-            <li><a href="#"><i class="fa fa-group"></i> Suporte de Terceiros</a></li>
+            <!-- <li><a href="#"><i class="fa fa-wrench"></i> Produtos</a></li> -->
+            <!-- <li><a href="#"><i class="fa fa-group"></i> Suporte de Terceiros</a></li> -->
           </ul>
         </li>
         <li>
           <a th:href="@{/host/consulta}">
             <i class="fa fa-desktop"></i> <span>Hosts</span>
+            <!-- <span class="pull-right-container">
+              <span class="label label-danger pull-right">5</span>
+              <span class="label label-success pull-right">4</span>
+            </span> -->
+          </a>
+        </li>
+        <li>
+          <a th:href="@{/impressora/consulta}">
+            <i class="fa fa-print"></i> <span>Impressoras</span>
             <!-- <span class="pull-right-container">
               <span class="label label-danger pull-right">5</span>
               <span class="label label-success pull-right">4</span>
