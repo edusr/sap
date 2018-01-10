@@ -6,4 +6,5 @@ import br.com.pxt.sap.domain.Tonner;
 
 public interface TonnerRepository extends JpaRepository<Tonner, Long>{
 
+	
 }

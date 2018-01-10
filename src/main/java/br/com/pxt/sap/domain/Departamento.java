@@ -64,4 +64,9 @@ public class Departamento implements Serializable {
 		this.host = host;
 	}
 
+	@Override
+	public String toString() {
+		return this.nomeDepartamento;
+	}
+	
 }

@@ -20,11 +20,16 @@
 			  <option value="modelImp">Modelo Impressora</option>
 			  <option value="tonner">Tonner</option>
 			</select>
+		    
           
-	          <a style="float:right" th:href="@{/novo}">
-		        <span  class="glyphicon glyphicon-refresh"></span>
-		        <b>Atualizar campos</b>
-		      </a>
+	        <a style="float:right" th:href="@{/novo}">
+		      <span  class="glyphicon glyphicon-refresh"></span>
+		      <b>Atualizar campos</b>
+		    </a>
+
+		    <div id="mensagemRetornoCadastro" class="alert alert-success" style="text-align:center" th:text="${mensagem}" 
+		      th:if="${not #strings.isEmpty(mensagem)}">
+		    </div>
           </div>
           
 		  <div id="host" class="formulario" style="display:none;">
@@ -73,6 +78,14 @@
 		};
 		
 		macAddress.addEventListener("keyup", formatMAC, false)
+	</script>
+	
+	<script>
+		$().ready(function() {
+			setTimeout(function () {
+				$('#mensagemRetornoCadastro').hide(); // "mensagemRetornoCadastro" é o id do elemento que seja manipular.
+			}, 3400); // O valor é representado em milisegundos.
+		});
 	</script>
 	</th:block>
 </body>

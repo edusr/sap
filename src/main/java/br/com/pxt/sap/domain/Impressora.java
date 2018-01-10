@@ -30,7 +30,7 @@ public class Impressora implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "id_modeloImp", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_impressoraModelo"))
 	private ModeloImpressora modeloImpressora;
-	@OneToMany(targetEntity=Departamento.class)
+	@OneToMany(targetEntity=Departamento.class, mappedBy = "impressora")
 	private List<Departamento> departamento;
 
 	public Long getId() {

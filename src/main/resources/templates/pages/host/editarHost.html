@@ -35,7 +35,6 @@
                 </li>
               </ul>
 
-              <a th:href="@{/host/consulta/}" class="btn btn-primary"><span class="glyphicon glyphicon-circle-arrow-left"> Voltar</span></a>
             </div>
      
           </div>
@@ -52,10 +51,13 @@
             <div class="tab-content">
             <div class="active tab-pane" id="editar">
               <div class="box-body">
-			    <form th:action="@{/host/salvar}" th:object="${host}" method="POST">
+			    <div id="mensagemRetornoCadastro" class="alert alert-success" style="text-align:center" th:text="${mensagem}" 
+			      th:if="${not #strings.isEmpty(mensagem)}">
+			    </div>
+			    <form th:action="@{/host/editar/salvarEdicao}" th:object="${host}" method="POST">
 	                <div class="row">
 	                  <div class="col-xs-2">
-	                    <button class="btn btn-info" type="submit">Salvar alterações</button>
+	                    <button class="btn btn-success" type="submit"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar alterações</button>
 	                  </div>
 	                </div>
 	                <br>

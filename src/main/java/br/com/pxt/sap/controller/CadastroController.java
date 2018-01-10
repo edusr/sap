@@ -40,11 +40,11 @@ public class CadastroController {
 	@Autowired private Seguranca seguranca;
 	
 	@GetMapping
-	public ModelAndView carregarObjetos() {
+	public ModelAndView carregarObjetos(Host host, Tonner tonner, Impressora impressora, ModeloImpressora modimp) {
 		ModelAndView mv = new ModelAndView("pages/cadastro/novo");
 		
 		// Objetos para cadastro de Host
-		mv.addObject("host", new Host());
+		//mv.addObject("host", new Host());
 		mv.addObject("hostsExistentes", hostRepo.findAll());
 		mv.addObject("tphost", tipoHostRepo.findAll());
 		mv.addObject("departamento", departamentoRepo.findAll());
@@ -55,10 +55,10 @@ public class CadastroController {
 		mv.addObject("hds", HardDisk.values());
 		
 		// Objetos para cadastro de Tonner
-		mv.addObject("tonner", new Tonner());
+		//mv.addObject("tonner", new Tonner());
 		
 		// Objetos para cadastro de impressora
-		mv.addObject("impressora", new Impressora());
+		//mv.addObject("impressora", new Impressora());
 		mv.addObject("departamento", departamentoRepo.findAll());
 		mv.addObject("modelosImp", modeloImpRepo.findAll());
 		mv.addObject("tonners", tonnerRepo.findAll());

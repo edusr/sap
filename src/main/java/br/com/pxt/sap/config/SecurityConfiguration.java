@@ -1,8 +1,13 @@
 package br.com.pxt.sap.config;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -10,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.ldap.authentication.ad.ActiveDirectoryLdapAuthenticationProvider;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -24,14 +30,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(AuthenticationManagerBuilder auth)
 			throws Exception {
 		auth
-			.userDetailsService(userDetailsService)
-			.passwordEncoder(bCryptPasswordEncoder);
+			.authenticationProvider(activeDirectoryLdapAuthenticationProvider());
+			//.userDetailsService(userDetailsService)
+			//.passwordEncoder(bCryptPasswordEncoder);
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-		http.
+		/*http.
 			authorizeRequests()
 				.antMatchers("/").permitAll()
 				.antMatchers("/login").permitAll()
@@ -45,7 +52,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.and().logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/").and().exceptionHandling()
-				.accessDeniedPage("/access-denied");
+				.accessDeniedPage("/access-denied");*/
+		http
+        .authorizeRequests()
+           .anyRequest().authenticated()
+           .and()
+        .formLogin()
+           .and()
+             .csrf()
+         .and()
+             .httpBasic();
 	}
 	
 	@Override
@@ -61,4 +77,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 		return bCryptPasswordEncoder;
 	}
+	
+	/*Autenticação com AD / LDAP */
+	
+	@Bean
+    public AuthenticationManager authenticationManager() {
+        return new ProviderManager(Arrays.asList(activeDirectoryLdapAuthenticationProvider()));
+    }
+
+    @Bean
+    public AuthenticationProvider activeDirectoryLdapAuthenticationProvider() {
+        ActiveDirectoryLdapAuthenticationProvider provider = new ActiveDirectoryLdapAuthenticationProvider("pxtudi.local", "ldaps://auth.peixoto.com.br:636");
+        provider.setConvertSubErrorCodesToExceptions(true);
+        provider.setUseAuthenticationRequestCredentials(true);
+
+        return provider;
+    }
+
 }

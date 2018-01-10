@@ -3,10 +3,10 @@ package br.com.pxt.sap.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.pxt.sap.domain.Tonner;
 import br.com.pxt.sap.repository.TonnerRepository;
@@ -33,8 +33,13 @@ public class TonnerController {
 	}
 	
 	@PostMapping(value="/salvar")
-	public String prepararFormulario(@ModelAttribute("tonner") Tonner tonner) {
+	public ModelAndView prepararFormulario(Tonner tonner, RedirectAttributes attributes) {
+		ModelAndView mv = new ModelAndView("redirect:/novo");
+		
 		tonnerService.save(tonner);
-		return "redirect:/novo";
+		
+		attributes.addFlashAttribute("mensagem", "Tonner salvo com sucesso");
+		
+		return mv;
 	}
 }

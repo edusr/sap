@@ -31,25 +31,35 @@
 		                 <th>Arquitetura</th>
 		                 <th>Chave SO</th>
 		                 <th>Status</th>
+		                 <th>Editar</th>
+		                 <th>Exlcuir</th>
 		               </tr>
 		             </thead>
 		             <tbody>
 		                <tr th:each="host : ${hosts}">
-		             	  <td><a th:href="@{/host/editar/} + ${host.hostname}" th:text="${host.hostname}"></a></td>
+		             	  <td th:text="${host.hostname}"></td>
 		             	  <td th:text="${host.departamento.nomeDepartamento}"></td>
 		             	  <td th:text="${host.utilizador}"></td>
 		             	  <td th:text="${host.processador.descricaoProcessador}"></td>
 		             	  <td th:text="${host.memoriaRam.memRam}"></td>
 		             	  <td th:text="${host.hd}"></td>
-		             	  <td th:text="${host.enderecoMac}"></td>
+		             	  <td th:text="${#strings.toUpperCase(host.enderecoMac)}"></td>
 		             	  <td th:text="${host.sistemaOperacional.sistemaOperacional}"></td>
 		             	  <td th:text="${host.arquiteturaSO.descricaoArquitetura}"></td>
-		             	  <td th:text="${host.chaveLicenca}"></td>
+		             	  <td th:text="${#strings.toUpperCase(host.chaveLicenca)}"></td>
 		             	  <td>
-		             	    <!-- <span th:if="${host.statusHost.valor == 1}"><i class="fa fa-circle" style="color:green"></i></span>
-		             	    <span th:if="${host.statusHost.valor == 2}"><i class="fa fa-circle text-primary" style="color:red"></i></span> -->
+		             	    <!-- Apresentar status do host somente com uma bolinha: 
+		             	    <span th:if="${host.statusHost.valor == 1}"><i class="fa fa-circle" style="color:green"></i></span>
+		             	    <span th:if="${host.statusHost.valor == 2}"><i class="fa fa-circle text-primary" style="color:red"></i></span> 
+		             	    -->
 		             	  	<span th:if="${host.statusHost.valor == 1}" class="label label-success" th:text="${host.statusHost.descricao}"></span>
 		             	  	<span th:if="${host.statusHost.valor == 2}" class="label label-danger" th:text="${host.statusHost.descricao}"></span>
+		             	  </td>
+		             	  <td style="width:15px">
+		             	    <a th:href="@{/host/editar/{id}(id=${host.id})}" class="btn btn-warning btn-xs" title="Editar"><span class="glyphicon glyphicon-pencil"></span></a>
+		             	  </td>
+		             	  <td style="width:15px">
+		             	    <a th:href="@{/host/excluir/{id}(id=${host.id})}" class="btn btn-danger btn-xs" title="Excluir"><span class="glyphicon glyphicon-trash"></span></a>
 		             	  </td>
 		             	</tr>
 		             </tbody>
@@ -66,6 +76,8 @@
 		               <th>Arquitetura</th>
 		               <th>Chave SO</th>
 		               <th>Status</th>
+		               <th>Editar</th>
+		               <th>Exlcuir</th>
 		             </tr>
 		             </tfoot>
 		           </table>
@@ -105,6 +117,8 @@
 	  		{"searchable": true},
 	  		{"searchable": true},
 	  		{"searchable": true},
+	  		{"searchable": false},
+	  		{"searchable": false},
 	  		{"searchable": false}
 	  	  ],
 	  	  "lengthMenu": [ [10, 20, 30, -1], [10, 20, 30, "Todos"] ] // defina quantidade de linhas para exibir

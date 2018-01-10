@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.pxt.sap.domain.HardDisk;
 import br.com.pxt.sap.domain.Host;
@@ -45,16 +46,20 @@ public class HostController {
 	}
 
 	@PostMapping(value="/salvar")
-	public String prepararFormulario(@ModelAttribute("host") Host host) {
+	public ModelAndView prepararFormulario(Host host, RedirectAttributes attributes) {
+		ModelAndView mv = new ModelAndView("redirect:/novo");
+
 		hostService.save(host);
-		return "redirect:/novo";
+		
+		attributes.addFlashAttribute("mensagem", "Host salvo com sucesso.");
+		return mv;
 	}
 	
-	@GetMapping(value="/editar/{hostname}")
-	public ModelAndView editarHost(@PathVariable("hostname") String hostname) {
+	@GetMapping(value="/editar/{id}")
+	public ModelAndView editar(@PathVariable("id") Host host) {
 		ModelAndView mv = new ModelAndView("pages/host/editarHost");
 		
-		mv.addObject("host", hostService.buscaPorHostname(hostname));
+		mv.addObject("host", host);
 		mv.addObject("tphost", tipoHostRepo.findAll());
 		mv.addObject("departamento", departamentoRepo.findAll());
 		mv.addObject("arqso", arquiteturaSORepo.findAll());
@@ -70,8 +75,15 @@ public class HostController {
 	}
 	
 	@PostMapping(value="/editar/salvarEdicao")
-	public void salvarHostEditado(@ModelAttribute("host") Host host) {
-		
+	public String salvarHostEditado(@ModelAttribute("host") Host host, RedirectAttributes attributes) {
+		hostService.save(host);
+		attributes.addFlashAttribute("mensagem", "Host atualizado com sucesso.");
+		return "redirect:/host/editar/" + host.getId();
 	}
 
+	@GetMapping(value = "/excluir/{id}")
+	public String exlcuir(@PathVariable("id") Host host) {
+		hostService.remove(host);
+		return "redirect:/host/consulta/";
+	}
 }
