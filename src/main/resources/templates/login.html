@@ -20,9 +20,9 @@
 			<h3 class="form-signin-heading" th:text="Welcome"></h3>
 			<br/>
 			 
-			<input type="text" id="identificacaoLogin" name="identificacaoLogin"  th:placeholder="Login"
+			<input type="text" id="identificacaoLogin" name="username"  th:placeholder="Login"
 				class="form-control" /> <br/> 
-			<input type="password" th:placeholder="Senha" id="senha" name="senha" class="form-control" /> <br /> 
+			<input type="password" th:placeholder="Senha" id="senha" name="password" class="form-control" /> <br /> 
 				
 			<div align="center" th:if="${param.error}">
 				<p style="font-size: 20; color: #FF1C19;">Login ou senha inválidos!</p>

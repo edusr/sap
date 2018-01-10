@@ -14,7 +14,7 @@ import br.com.pxt.sap.repository.HostRepository;
 import br.com.pxt.sap.security.Seguranca;
 
 @Controller
-@RequestMapping(value="/home")
+@RequestMapping(value= {"/home","/"})
 public class DashboardController {
 
 	@Autowired private HostRepository hostRepo;
